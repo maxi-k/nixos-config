@@ -5,6 +5,8 @@
     ../shared.nix
   ];
 
+  boot.supportedFilesystems = [ "ntfs" ];
+
   networking.hostName = "thinkpad-maxi"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
