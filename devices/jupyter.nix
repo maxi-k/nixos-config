@@ -17,14 +17,16 @@
       steam
       superTuxKart
       discord
+      usb-modeswitch
+      usb-modeswitch-data
     ];
   in dev ++ bspwm ++ local;
 
-  # packages for the current kernel version
-  boot.blacklistedKernelModules = ["rtl8xxxu"];
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    rtl8821cu # wifi+bluetooth stick
-  ];
+  # wifi + bluetooth stick setup
+  hardware.usb-modeswitch.enable = true;
+  # wifi stick driver
+  boot.initrd.kernelModules = [ "8821cu" ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ rtl8821cu ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

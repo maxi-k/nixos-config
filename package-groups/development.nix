@@ -10,6 +10,8 @@
   man-pages
   man-pages-posix
   gdb
+  gcc
+  bc
   killall
   # performace
   linuxPackages_latest.perf
@@ -27,4 +29,6 @@
   nodejs_18
   # other tools
   stow
+  usbutils
+  pciutils
 ]
