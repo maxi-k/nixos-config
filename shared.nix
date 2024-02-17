@@ -86,14 +86,6 @@
     description = "Maximilian Kuschewski";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      thunderbird
-      stow
-      spotify
-      syncthing
-      cryptomator
-      hunspell
-      hunspellDicts.de_DE
-      hunspellDicts.en_US
     ];
     shell = pkgs.zsh;
   };
@@ -116,6 +108,19 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.firefox.speechSynthesisSupport = true;
+
+  # font packages
+  fonts.packages = with pkgs; [
+      # icons
+      emacs-all-the-icons-fonts
+      nerdfonts
+      font-awesome
+      noto-fonts-emoji
+      # emacs variable-pitch font
+      inter
+      # monospace font
+      jetbrains-mono
+  ];
 
   # Enable zsh
   programs.zsh.enable = true;

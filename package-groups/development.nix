@@ -20,10 +20,6 @@
   iotop
   powertop
   lm_sensors
-  # Fonts
-  jetbrains-mono
-  font-awesome
-  nerdfonts
   # nice-to-have global languages
   python3
   nodejs_18

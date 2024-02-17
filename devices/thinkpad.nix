@@ -41,7 +41,7 @@
   programs.hyprland = {
       # portalPackage = true;
       xwayland.enable = true;
-      xwayland.hidpi = true;
+      #xwayland.hidpi = true;
       enable = true;
   };
 
