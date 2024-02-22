@@ -5,7 +5,7 @@
      rofi
      devour
      feh
-     polybar
+     (polybar.override { pulseSupport = true; })
      eww
      dunst
      libnotify

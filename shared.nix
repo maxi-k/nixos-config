@@ -95,19 +95,15 @@
     experimental-features = [ "nix-command" "flakes" ];
   };
 
-  # Enable nix-direnv for automatically loading shell.nix files
-  nix.settings = {
-    keep-outputs = true;
-    keep-derivations = true;
-  };
-  environment.pathsToLink = [ "/share/nix-direnv" ];
-  environment.systemPackages = with pkgs; [
-    direnv
-    nix-direnv
-  ];
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.firefox.speechSynthesisSupport = true;
+  # enable the nix user repository
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+      inherit pkgs;
+    };
+  };
 
   # font packages
   fonts.packages = with pkgs; [
@@ -126,6 +122,8 @@
   programs.zsh.enable = true;
   # enable command-not-found support
   programs.command-not-found.enable = true;
+  # Enable nix-direnv for automatically loading shell.nix files
+  programs.direnv.enable = true;
 
   documentation = {
     # enable dev documentation (manpages)
