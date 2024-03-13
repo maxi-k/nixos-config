@@ -1,9 +1,9 @@
-{ config, pkgs, ...}@ctx:
+{ config, pkgs, lib, ...}@ctx:
 
 {
   imports = [
     ../shared.nix
-  ];
+  ] ++ lib.optional (builtins.pathExists ../local.nix) ../local.nix;
 
   networking.hostName = "jupyter";
   # networking.wireless.enable = true;
@@ -23,7 +23,6 @@
       amdgpu_top
       usb-modeswitch
       usb-modeswitch-data
-      nur.repos.LuisChDev.nordvpn
     ];
   in dev ++ bspwm ++ local;
 
