@@ -30,6 +30,7 @@
     # inputMethod.enabled = "ibus";
   };
 
+  services.displayManager.defaultSession = "none+bspwm";
   services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
@@ -41,11 +42,10 @@
 
     # Enable BSPWM and set as default
     windowManager.bspwm.enable = true;
-    displayManager.defaultSession = "none+bspwm";
 
     # Configure keymap in X11
-    layout = "us,de";
-    xkbVariant = "";
+    xkb.layout = "us,de";
+    xkb.variant = "";
     # xkbOptions = "grp:win_space_toggle";
   };
 
@@ -58,7 +58,7 @@
   # services.tlp.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
+  # sound.enable = true; # pre 24.05
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -75,7 +75,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput = {
+  services.libinput = {
     enable = true;
     touchpad.naturalScrolling = true;
   };
