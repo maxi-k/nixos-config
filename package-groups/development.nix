@@ -27,4 +27,5 @@
   stow
   usbutils
   pciutils
+  entr
 ]

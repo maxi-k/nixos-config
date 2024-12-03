@@ -12,6 +12,7 @@
   sxiv
   zathura
   gimp
+  xournalpp
   # web stuff
   firefox
   thunderbird

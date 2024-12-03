@@ -18,6 +18,7 @@
      jq
      redshift
      tabbed
+     xorg.xwininfo
      # picom (manually starting instead of using services.picom.enable)
      picom
 ] ++ (import ./desktop.nix ctx)
