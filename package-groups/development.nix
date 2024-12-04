@@ -7,8 +7,6 @@
   tmux
   zsh bash
   gnumake
-  man-pages
-  man-pages-posix
   gdb
   gcc
   bc
@@ -28,4 +26,7 @@
   usbutils
   pciutils
   entr
+  # documentation
+  man-pages
+  man-pages-posix
 ]
