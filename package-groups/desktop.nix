@@ -3,10 +3,11 @@
   alacritty
   # system utility
   networkmanager # network mgmnt
-  blueman # bluetooth mgmnt
-  tlp  # power mgmnt
-  brightnessctl # brightness mgmnt
-  playerctl # media player mgmnt
+  blueman bluez  # bluetooth mgmnt
+  tlp            # power mgmnt
+  brightnessctl  # brightness mgmnt
+  playerctl      # media player mgmnt
+  easyeffects    # noise cancellation
   # spell checking
   hunspell
   hunspellDicts.de_DE
@@ -21,6 +22,7 @@
   ncdu
   nix-tree
   # web stuff
+  brave
   firefox
   thunderbird
   spotify

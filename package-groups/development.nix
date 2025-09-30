@@ -1,6 +1,6 @@
 { pkgs, ... }: with pkgs; [
   # dev tools & editors
-  emacs vim
+  emacs vim libvterm
   git git-lfs
   curl wget
   zip unzip unp
@@ -26,6 +26,8 @@
   usbutils
   pciutils
   entr
+  copilot-language-server
+  claude-code
   # documentation
   man-pages
   man-pages-posix

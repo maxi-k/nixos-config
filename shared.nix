@@ -3,6 +3,7 @@
 {
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.enableIPv6  = false;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -31,22 +32,24 @@
   };
 
   services.displayManager.defaultSession = "none+bspwm";
+  services.displayManager.ly.enable = true; #
   services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
 
-    # Enable the GNOME Desktop Environment.
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
-    # desktopManager.plasma5.enable = true;
-
     # Enable BSPWM and set as default
     windowManager.bspwm.enable = true;
+    windowManager.hypr.enable = true;
+
+    # Enable the GNOME Desktop Environment.
+    # desktopManager.gnome.enable = true;
+    # desktopManager.plasma5.enable = true;
 
     # Configure keymap in X11
     xkb.layout = "us,de";
     xkb.variant = "";
     # xkbOptions = "grp:win_space_toggle";
+    xkbOptions = "caps:escape,escape:";
   };
 
   # Enable CUPS to print documents.
@@ -59,8 +62,8 @@
 
   # Enable sound with pipewire.
   # sound.enable = true; # pre 24.05
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -85,8 +88,7 @@
     isNormalUser = true;
     description = "Maximilian Kuschewski";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    ];
+    packages = with pkgs; [];
     shell = pkgs.zsh;
   };
 
@@ -110,7 +112,10 @@
   fonts.packages = with pkgs; [
       # icons
       emacs-all-the-icons-fonts
-      nerdfonts
+      nerd-fonts.symbols-only
+      nerd-fonts.noto
+      nerd-fonts.hack
+      nerd-fonts.droid-sans-mono
       font-awesome
       noto-fonts-emoji
       # emacs variable-pitch font
