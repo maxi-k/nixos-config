@@ -117,11 +117,12 @@
       nerd-fonts.hack
       nerd-fonts.droid-sans-mono
       font-awesome
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       # emacs variable-pitch font
       inter
       # monospace font
       jetbrains-mono
+      libertinus
   ];
 
   # Enable zsh

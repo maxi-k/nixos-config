@@ -21,4 +21,5 @@
      xorg.xwininfo
      # picom (manually starting instead of using services.picom.enable)
      picom
+     i3lock-fancy-rapid
 ] ++ (import ./desktop.nix ctx)

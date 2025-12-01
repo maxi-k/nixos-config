@@ -31,4 +31,8 @@
   # documentation
   man-pages
   man-pages-posix
+  #
+  libtool
+  cmake
+  glib
 ]

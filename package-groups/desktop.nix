@@ -18,6 +18,7 @@
   zathura
   gimp
   xournalpp
+  imagemagick ghostscript
   # disk usage visualization
   ncdu
   nix-tree
@@ -27,5 +28,5 @@
   thunderbird
   spotify
   syncthing
-  cryptomator
+  # cryptomator
 ]
