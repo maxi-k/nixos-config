@@ -2,8 +2,10 @@
 
 {
   # Enable networking
-  networking.networkmanager.enable = true;
-  networking.enableIPv6  = false;
+  networking = {
+    networkmanager.enable = true;
+    nameservers = ["1.1.1.1" "8.8.8.8"];
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -81,6 +83,14 @@
   services.libinput = {
     enable = true;
     touchpad.naturalScrolling = true;
+  };
+
+  # enable gnupg + pinentry
+  services.pcscd.enable = true;
+  programs.gnupg.agent = {
+     enable = true;
+     enableSSHSupport = true;
+     pinentryPackage = pkgs.lib.mkForce pkgs.pinentry-emacs;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

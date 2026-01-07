@@ -46,11 +46,15 @@
     # droidcam
   ]);
 
+  services.tailscale.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
   
   programs.adb.enable = true;
   users.users.maxi.extraGroups = ["adbusers" "plugdev"];
-  boot.kernelModules = [ "v4l2loopback" ];
+  boot.kernelModules = [ "v4l2loopback" "usbhdi" ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    # usbhdi
+  ];
 
   # test hyprland
   # programs.hyprland = {
