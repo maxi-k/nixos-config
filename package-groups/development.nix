@@ -12,7 +12,7 @@
   bc
   killall
   # performace
-  linuxPackages_latest.perf
+  perf
   hotspot
   htop
   iotop

@@ -5,6 +5,7 @@
   networking = {
     networkmanager.enable = true;
     nameservers = ["1.1.1.1" "8.8.8.8"];
+    enableIPv6  = true;
   };
 
   # Bootloader.
@@ -51,7 +52,8 @@
     xkb.layout = "us,de";
     xkb.variant = "";
     # xkbOptions = "grp:win_space_toggle";
-    xkbOptions = "caps:escape,escape:";
+    xkb.options = "caps:escape,escape:";
+
   };
 
   # Enable CUPS to print documents.
@@ -144,6 +146,9 @@
 
   documentation = {
     # enable dev documentation (manpages)
+    enable = true;
+    man.enable = true;
+    doc.enable = true;
     dev.enable = true;
     # re-generate man cache for apropos, whatis, man -k
     man.generateCaches = true;

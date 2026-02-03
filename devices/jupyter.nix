@@ -4,6 +4,9 @@
   imports = [
     ../shared.nix
     ../modules/podman.nix
+    ../modules/hyprland.nix
+    # ../modules/niri.nix
+    ../modules/virtualization.nix
   ] ++ lib.optional (builtins.pathExists ../local.nix) ../local.nix;
 
   networking.hostName = "jupyter";
@@ -14,20 +17,33 @@
   environment.systemPackages = let
     dev = import ../package-groups/development.nix ctx;
     bspwm = import ../package-groups/bspwm.nix ctx;
+    # quickshell = import ../packages/quickshell.nix ctx;
+    # quickshell = (builtins.getFlake (import ../packages/quickshell.nix ctx)).packages.${builtins.currentSystem}.default;
+    # quickshell = (builtins.getFlake "github:outfoxxed/quickshell").packages.${builtins.currentSystem}.default;
     local = with pkgs; [
       superTuxKart
+      limo
       discord
-      brave
       vlc
       zoom-us
-      easyeffects
       amdgpu_top
+      # btop-rocm # btop + amdgu support
       usb-modeswitch
       usb-modeswitch-data
       gamemode
       via
+      # quickshell
+      # for controllers etc
+      steam-devices-udev-rules
     ];
   in dev ++ bspwm ++ local;
+
+  services.syncthing = {
+   enable = true; 
+   user = "maxi";
+   dataDir = "/home/maxi";
+  };
+  services.tailscale.enable = true;
 
   # steam package + some tweaks
   programs.steam.enable = true;
@@ -36,7 +52,17 @@
   programs.java = { enable = true; package = pkgs.openjdk21; };
 
   # wifi + bluetooth stick setup
+  hardware.bluetooth = {
+     enable = true; 
+  #   input = {
+  #     General = {  
+  #       UserspaceHID=true; # playstation
+  #     };
+  #   };
+  };
   hardware.usb-modeswitch.enable = true;
+
+  # "hid_playstation"
   # wifi stick driver
   boot.initrd.kernelModules = [ "8821cu" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [

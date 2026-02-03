@@ -28,5 +28,5 @@
   thunderbird
   spotify
   syncthing
-  # cryptomator
+  cryptomator
 ]

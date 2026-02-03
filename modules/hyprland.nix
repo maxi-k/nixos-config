@@ -6,55 +6,65 @@
   ];
 
   home-manager.backupFileExtension = ''home-manager-backup'';
-  users.users.test = {
-    isNormalUser = true;
-    description = "Test User";
-    extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
-  };
   programs.hyprland.enable = true;
-  home-manager.users.test = { pkgs, ... }: {
-    home.packages = [];
-    programs.kitty.enable = true;
-    wayland.windowManager.hyprland = {
-      enable = true; # enable Hyprland
+  home-manager.users.maxi = { pkgs, ... }: {
+    imports = [
+      pkgs.inputs.noctalia.homeModules.default
+    ];
 
-      settings = {
-        "$mod" = "Super";
-        bind = [
-          "$mod, F, exec, firefox"
-          "$mod, P, exec, kitty"
-          "$mod, Space, exec, kitty"
-          "$mod, Shift, Return, exec, alacritty"
-        ];
+  # configure options
+  programs.noctalia-shell = {
+    enable = true;
+    settings = {
+      # configure noctalia here
+      bar = {
+        density = "compact";
+        position = "right";
+        showCapsule = false;
+        widgets = {
+          left = [
+            {
+              id = "ControlCenter";
+              useDistroLogo = true;
+            }
+            {
+              id = "Network";
+            }
+            {
+              id = "Bluetooth";
+            }
+          ];
+          center = [
+            {
+              hideUnoccupied = false;
+              id = "Workspace";
+              labelMode = "none";
+            }
+          ];
+          right = [
+            {
+              alwaysShowPercentage = false;
+              id = "Battery";
+              warningThreshold = 30;
+            }
+            {
+              formatHorizontal = "HH:mm";
+              formatVertical = "HH mm";
+              id = "Clock";
+              useMonospacedFont = true;
+              usePrimaryColor = true;
+            }
+          ];
+        };
+      };
+      colorSchemes.predefinedScheme = "Monochrome";
+      location = {
+        monthBeforeDay = true;
+        name = "Munich, Germany";
       };
     };
-
-    home.pointerCursor = {
-      gtk.enable = true;
-      # x11.enable = true;
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Classic";
-      size = 16;
-    };
-
-    gtk = {
-      enable = true;
-
-      theme = {
-        package = pkgs.flat-remix-gtk;
-        name = "Flat-Remix-GTK-Grey-Darkest";
-      };
-
-      iconTheme = {
-        package = pkgs.adwaita-icon-theme;
-        name = "Adwaita";
-      };
-
-      font = {
-        name = "Sans";
-        size = 11;
-      };
-    };
+    # this may also be a string or a path to a JSON file.
   };
+  };
+
 }
