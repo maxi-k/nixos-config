@@ -1,11 +1,7 @@
-{ config, pkgs, ... }:
-let
-  # home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-in
+{ pkgs, inputs, ... }:
 {
   imports = [
-    (import "${home-manager}/nixos")
+    (import "${inputs.home-manager}")
   ];
 
   home-manager.useGlobalPkgs = true;

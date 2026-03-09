@@ -21,13 +21,15 @@
   # nice-to-have global languages
   python3
   nodejs_22
+  # scientific calculator
+  numbat
   # other tools
   stow
   usbutils
   pciutils
   entr
   copilot-language-server
-  claude-code
+  codex
   # documentation
   man-pages
   man-pages-posix

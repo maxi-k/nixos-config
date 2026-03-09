@@ -4,7 +4,7 @@
   imports = [
     ../shared.nix
     ../modules/podman.nix
-    ../modules/hyprland.nix
+    # ../modules/hyprland.nix
     # ../modules/niri.nix
     ../modules/virtualization.nix
   ] ++ lib.optional (builtins.pathExists ../local.nix) ../local.nix;
@@ -43,36 +43,26 @@
    user = "maxi";
    dataDir = "/home/maxi";
   };
-  services.tailscale.enable = true;
 
+  services.tailscale.enable = true;
   # steam package + some tweaks
   programs.steam.enable = true;
-
   # set java version
   programs.java = { enable = true; package = pkgs.openjdk21; };
 
   # wifi + bluetooth stick setup
-  hardware.bluetooth = {
-     enable = true; 
-  #   input = {
-  #     General = {  
-  #       UserspaceHID=true; # playstation
-  #     };
-  #   };
-  };
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.input.General.UserspaceHID = true;
   hardware.usb-modeswitch.enable = true;
-
-  # "hid_playstation"
-  # wifi stick driver
-  boot.initrd.kernelModules = [ "8821cu" ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    rtl8821cu
-    # amd gpu
-    # amdgpu-pro
+  # auto mode switching for cd-rom mode (windows installer) to
+  # networking stick mode for wifi + bluetooth stick
+  services.udev.packages = with pkgs; [
+    usb-modeswitch
+    usb-modeswitch-data
   ];
 
   # newer kernel version for development (uring etc.)
-  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
