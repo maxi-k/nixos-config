@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../shared.nix
+    ./hardware-configuration.nix
     ../modules/podman.nix
     # ../modules/hyprland.nix
     # ../modules/niri.nix

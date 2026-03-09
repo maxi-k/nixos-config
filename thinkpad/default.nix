@@ -1,9 +1,7 @@
 { config, pkgs, ... }@ctx:
 
 {
-  imports = [
-    ../shared.nix
-  ];
+  imports = [];
 
   boot.supportedFilesystems = [ "ntfs" ];
 
