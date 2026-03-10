@@ -18,6 +18,9 @@ let
           echo "${tigerwmSession}" > $out/share/wayland-sessions/tigerwm.desktop
         '';
     passthru.providedSessions = [ "tigerwm" ];
+    xwayland = true;
+    configFile = ./config.zig;
+    keybindingsFile = ./keybindings.zig;
   });
 in
 {
