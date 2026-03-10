@@ -1,4 +1,8 @@
-{ pkgs, ... }@ctx: with pkgs; [
+{ config, lib, pkgs, ... }:
+
+{
+  imports = [ ./desktop.nix ];
+  environment.systemPackages = with pkgs; [
      bspwm
      sxhkd
      bsp-layout
@@ -19,7 +23,8 @@
      jq
      redshift
      tabbed
-     xorg.xwininfo
+     xwininfo
      # picom (manually starting instead of using services.picom.enable)
      picom
-] ++ (import ./desktop.nix ctx)
+  ];
+}

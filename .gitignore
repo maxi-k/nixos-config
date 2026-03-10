@@ -3,3 +3,5 @@
 *.log
 tmp/
 local.nix
+result
+*.qcow2

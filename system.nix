@@ -1,18 +1,23 @@
-{ config,  pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
-  # Enable networking
-  networking = {
-    networkmanager.enable = true;
-    nameservers = ["1.1.1.1" "8.8.8.8"];
-    enableIPv6  = true;
+  # Nix setup
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
   };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Set your time zone.
+  # Enable networking, set name servers to cloudflare & google
+  networking = {
+    networkmanager.enable = true;
+    nameservers = ["1.1.1.1" "8.8.8.8"];
+    enableIPv6  = true;
+  };
+
+  # Set time zone.
   time.timeZone = "Europe/Berlin";
 
   # Select internationalisation properties.
@@ -42,7 +47,6 @@
 
     # Enable BSPWM and set as default
     windowManager.bspwm.enable = true;
-    windowManager.hypr.enable = true;
 
     # Enable the GNOME Desktop Environment.
     # desktopManager.gnome.enable = true;
@@ -53,7 +57,6 @@
     xkb.variant = "";
     # xkbOptions = "grp:win_space_toggle";
     xkb.options = "caps:escape,escape:";
-
   };
 
   # Enable CUPS to print documents.
@@ -95,19 +98,12 @@
      pinentryPackage = pkgs.lib.mkForce pkgs.pinentry-emacs;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.maxi = {
-    isNormalUser = true;
-    description = "Maximilian Kuschewski";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
-    shell = pkgs.zsh;
-  };
-
-  # Nix setup
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-  };
+  # Enable zsh
+  programs.zsh.enable = true;
+  # enable command-not-found support
+  programs.command-not-found.enable = true;
+  # Enable nix-direnv for automatically loading shell.nix files
+  programs.direnv.enable = true;
 
   # font packages
   fonts.packages = with pkgs; [
@@ -126,13 +122,6 @@
       libertinus
   ];
 
-  # Enable zsh
-  programs.zsh.enable = true;
-  # enable command-not-found support
-  programs.command-not-found.enable = true;
-  # Enable nix-direnv for automatically loading shell.nix files
-  programs.direnv.enable = true;
-
   documentation = {
     # enable dev documentation (manpages)
     enable = true;
@@ -140,6 +129,6 @@
     doc.enable = true;
     dev.enable = true;
     # re-generate man cache for apropos, whatis, man -k
-    man.generateCaches = true;
+    man.cache.enable = true;
   };
 }

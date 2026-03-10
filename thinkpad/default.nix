@@ -1,7 +1,10 @@
 { config, pkgs, ... }@ctx:
 
 {
-  imports = [];
+  imports = [
+    ../modules/bspwm.nix
+    ../modules/development.nix
+  ];
 
   boot.supportedFilesystems = [ "ntfs" ];
 
@@ -23,10 +26,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = let
-    dev = import ../package-groups/development.nix ctx;
-    bspwm = import ../package-groups/bspwm.nix ctx;
-  in dev ++ bspwm ++ (with pkgs; [
+  environment.systemPackages = with pkgs; [
     # local packages
     zoom-us
     google-chrome  
@@ -42,7 +42,7 @@
     # android-udev-rules
     # linuxKernel.packages.linux_6_1.v4l2loopback
     # droidcam
-  ]);
+  ];
 
   services.tailscale.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
@@ -53,18 +53,6 @@
   boot.extraModulePackages = with config.boot.kernelPackages; [
     # usbhdi
   ];
-
-  # test hyprland
-  # programs.hyprland = {
-  #     # portalPackage = true;
-  #     xwayland.enable = true;
-  #     #xwayland.hidpi = true;
-  #     enable = true;
-  # };
-
-  # programs.sway = {
-  #   enable = true;
-  # };
 
   # when enabling multiple desktop environments
   # (e.g. plasma & gnome), need to specify this

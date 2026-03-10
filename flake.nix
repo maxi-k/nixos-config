@@ -3,19 +3,23 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+     url = "github:nix-community/home-manager"; 
+     inputs.nixpkgs.follows = "nixpkgs";
+    };
+    tigerwm = {
+      url = "git+ssh://git@github.com/toziegler/tigerWM.git";
+      # url = "path:/home/maxi/dev/tigerwm";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, tigerwm, ... }:
 
     let
       system = "x86_64-linux"; 
-      specialArgs = { inherit inputs; };
 
-      overlays = [
-
-      ];
+      overlays = [];
 
       pkgs = import nixpkgs {
         inherit overlays system;
@@ -25,16 +29,10 @@
         };
       };
 
-      # homeModule = {
-      #   home-manager.useGlobalPkgs = true;
-      #   home-manager.useUserPackages = true;
-      #   home-manager.users.tziegler = import ./home.nix;
-      # };
-
-      baseModules = [
-        ./shared.nix
-        # home-manager.nixosModules.home-manager
-        #homeModule
+      sharedModules = [
+        ./system.nix
+        ./user.nix
+        home-manager.nixosModules.home-manager
       ];
 
       hostModules = {
@@ -44,8 +42,9 @@
 
       buildHost = name:
         nixpkgs.lib.nixosSystem {
-          inherit system pkgs;
-          modules = baseModules ++ [hostModules.${name}];
+          inherit pkgs;
+          specialArgs = { inherit inputs; inherit system; };
+          modules = sharedModules ++ [hostModules.${name}];
         };
 
     in {

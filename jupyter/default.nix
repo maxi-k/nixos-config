@@ -1,27 +1,21 @@
-{ config, pkgs, lib, ...}@ctx:
+{ config, pkgs, lib, inputs, ...}@ctx:
 
 {
   imports = [
     ./hardware-configuration.nix
+    ../modules/tigerwm
+    ../modules/bspwm.nix
+    ../modules/development.nix
     ../modules/podman.nix
-    # ../modules/hyprland.nix
-    # ../modules/niri.nix
     ../modules/virtualization.nix
   ] ++ lib.optional (builtins.pathExists ../local.nix) ../local.nix;
 
   networking.hostName = "jupyter";
-  # networking.wireless.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = let
-    dev = import ../package-groups/development.nix ctx;
-    bspwm = import ../package-groups/bspwm.nix ctx;
-    # quickshell = import ../packages/quickshell.nix ctx;
-    # quickshell = (builtins.getFlake (import ../packages/quickshell.nix ctx)).packages.${builtins.currentSystem}.default;
-    # quickshell = (builtins.getFlake "github:outfoxxed/quickshell").packages.${builtins.currentSystem}.default;
-    local = with pkgs; [
-      superTuxKart
+  environment.systemPackages = with pkgs; [
+      supertuxkart
       limo
       discord
       vlc
@@ -32,17 +26,9 @@
       usb-modeswitch-data
       gamemode
       via
-      # quickshell
       # for controllers etc
       steam-devices-udev-rules
-    ];
-  in dev ++ bspwm ++ local;
-
-  services.syncthing = {
-   enable = true; 
-   user = "maxi";
-   dataDir = "/home/maxi";
-  };
+  ];
 
   services.tailscale.enable = true;
   # steam package + some tweaks
