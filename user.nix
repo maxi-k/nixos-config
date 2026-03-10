@@ -1,12 +1,12 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, user, ... }:
 
 # User configuration shared between hosts
 {
   imports = [];
 
-  users.users.maxi = {
+  users.users.${user.name} = {
     isNormalUser = true;
-    description = "Maximilian Kuschewski";
+    description = user.fullName;
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
     shell = pkgs.zsh;
@@ -16,13 +16,14 @@
 
   services.syncthing = {
    enable = true; 
-   user = "maxi";
-   dataDir = "/home/maxi";
+   user = user.name;
+   dataDir = user.homedir;
   };
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users.maxi = {pkgs, ...}: {
+  home-manager.users.${user.name} = {pkgs, ...}: {
+    home.homeDirectory = user.homedir;
     /* The home.stateVersion option does not have a default and must be set */
     home.stateVersion = "25.05";
     /* Here goes the rest of your home-manager config, e.g. home.packages = [ pkgs.foo ]; */

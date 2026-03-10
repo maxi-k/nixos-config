@@ -40,10 +40,16 @@
         thinkpad = ./thinkpad;
       };
 
+      user = {
+        name = "maxi";
+        homedir = "/home/maxi";
+        fullName = "Maximilian Kuschewski";
+      };
+
       buildHost = name:
         nixpkgs.lib.nixosSystem {
           inherit pkgs;
-          specialArgs = { inherit inputs; inherit system; };
+          specialArgs = { inherit inputs; inherit system; inherit user; };
           modules = sharedModules ++ [hostModules.${name}];
         };
 

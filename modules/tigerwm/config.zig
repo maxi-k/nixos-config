@@ -104,32 +104,18 @@ pub const MonitorRule = struct {
 };
 pub const monitor_rules = [_]MonitorRule{
     .{
-        .name = "eDP-1",
-        .make = null,
-        .model = null,
-        .serial = null,
-        .description = null,
-        .mfact = 0.55,
-        .nmaster = 1,
-        .scale = 2.0,
-        .layout_idx = 0,
-        .transform = 0,
-        .x = 3840,
-        .y = 240,
-    },
-    .{
         .name = null,
         .make = null,
-        .model = "P32p-30",
-        .serial = "V30D66R3",
+        .model = "BenQ EW2780Q",
+        .serial = "38L01560019",
         .description = null,
         .mfact = 0.55,
         .nmaster = 1,
-        .scale = 2.0,
+        .scale = 1.0,
         .layout_idx = 0,
         .transform = 0,
-        .x = 1920,
-        .y = 120,
+        .x = 2560,
+        .y = 1440,
     },
     .{
         .name = null,
@@ -165,9 +151,9 @@ pub const rules = [_]Rule{
 
 /// Modifier key used as the main modifier (Alt by default).
 /// WLR_MODIFIER_ALT
-pub const mod_key: u32 = 8;
+// pub const mod_key: u32 = 8;
 /// WLR_MODIFIER_LOG
-// pub const mod_key: u32 = 64;
+pub const mod_key: u32 = 64;
 
 // enum wlr_keyboard_modifier {
 //  WLR_MODIFIER_SHIFT = 1 << 0,
@@ -210,22 +196,24 @@ pub const Button = struct {
 // ── Commands ───────────────────────────────────────────────────────────
 
 pub const term_bin = "/run/current-system/sw/bin/alacritty";
-pub const launcher_bin =  "/run/current-system/sw/bin/rofi";
+pub const launcher_bin =  "/home/maxi/.dotfiles/bin/launcher";
 
 pub const scratchpad_tag: u32 = 1 << 20;
 pub const term_cmd = [_][*:0]const u8{term_bin};
 pub const alt_term_cmd = [_][*:0]const u8{"/run/current-system/sw/bin/ghostty"};
-pub const emacs_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "emacs" };
-pub const scratchpad_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "emacs-scratchpad" };
-pub const menu_cmd = [_][*:0]const u8{ launcher_bin, "-mode", "combi", "-combi-modi", "window,run,ssh", "-show", "drun", "-theme", "material" };
-pub const window_cmd = [_][*:0]const u8{ launcher_bin, "-show", "window", "-theme", "material" };
+pub const emacs_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "DISPLAY=:12 emacs" };
+pub const scratchpad_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "DISPLAY=:12 emacs-scratchpad" };
+pub const menu_cmd = [_][*:0]const u8{ launcher_bin  };
+pub const window_cmd = [_][*:0]const u8{ launcher_bin };
 pub const screenshot_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "/run/current-system/sw/bin/grim -g \"$(/run/current-system/sw/bin/slurp)\" - | /run/current-system/sw/bin/wl-copy" };
 pub const calc_cmd = [_][*:0]const u8{ term_bin, "-e", "numbat" };
 pub const excel_cmd = [_][*:0]const u8{ "bin/sh", "-c", "libreoffice --calc" };
-pub const lock_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "swaylock -c 000000" };
+pub const lock_cmd = [_][*:0]const u8{ "/bin/sh", "-kc", "swaylock -c 000000" };
 pub const bar_cmd = [_][*:0]const u8{"/run/current-system/sw/bin/waybar"};
 pub const portal_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots && systemctl --user start xdg-desktop-portal xdg-desktop-portal-wlr" };
+pub const xwayland_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "xwayland-satellite :12" };
 pub const autostart_cmds = [_][]const [*:0]const u8{
+    &xwayland_cmd,
     &bar_cmd,
     // &term_cmd
     // Example idle/lock/DPMS workflow (disabled by default):

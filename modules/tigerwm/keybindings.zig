@@ -41,8 +41,7 @@ pub const ALT = c.WLR_MODIFIER_ALT;
 pub const keys = keys: {
     const core = [_]KeyBinding{
         // Spawn commands
-        .{ .mod = MODKEY, .keysym = c.XKB_KEY_Return, .action = .{ .spawn = &config.term_cmd } },
-        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_Return, .action = .{ .spawn = &config.alt_term_cmd } },
+        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_Return, .action = .{ .spawn = &config.term_cmd } },
         .{ .mod = MODKEY, .keysym = c.XKB_KEY_p, .action = .{ .spawn = &config.menu_cmd } },
         // .{ .mod = MODKEY, .keysym = c.XKB_KEY_p, .action = .{ .spawn = &config.window_cmd } },
         // .{ .mod = MODKEY, .keysym = c.XKB_KEY_s, .action = .{ .spawn = &config.screenshot_cmd } },
@@ -64,7 +63,7 @@ pub const keys = keys: {
         .{ .mod = MODKEY, .keysym = c.XKB_KEY_Right, .action = .{ .setmfact = 0.05 } },
         .{ .mod = MODKEY, .keysym = c.XKB_KEY_i, .action = .{ .incnmaster = 1 } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_I, .action = .{ .incnmaster = -1 } },
-        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_Return, .action = .{ .zoom = {} } },
+        .{ .mod = MODKEY, .keysym = c.XKB_KEY_Return, .action = .{ .zoom = {} } },
         .{ .mod = MODKEY, .keysym = c.XKB_KEY_space, .action = .{ .zoom = {} } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_K, .action = .{ .rotate_clients = 1 } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_J, .action = .{ .rotate_clients = -1 } },
@@ -77,16 +76,18 @@ pub const keys = keys: {
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_L, .action = .{ .tagmon = c.WLR_DIRECTION_RIGHT } },
 
         // Layout
-        .{ .mod = MODKEY, .keysym = c.XKB_KEY_f, .action = .{ .togglefullscreen = {} } },
+        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_f, .action = .{ .togglefullscreen = {} } },
         .{ .mod = MODKEY, .keysym = c.XKB_KEY_t, .action = .{ .setlayout = 0 } },
-        .{ .mod = MODKEY, .keysym = c.XKB_KEY_F, .action = .{ .setlayout = 1 } },
+        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_g, .action = .{ .setlayout = 1 } },
         .{ .mod = MODKEY, .keysym = c.XKB_KEY_m, .action = .{ .setlayout = 2 } },
-        .{ .mod = MODKEY, .keysym = c.XKB_KEY_v, .action = .{ .setlayout = 3 } },
-        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_space, .action = .{ .togglefloating = {} } },
-        .{ .mod = MODKEY, .keysym = c.XKB_KEY_minus, .action = .{ .togglescratch = {} } },
-        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_underscore, .action = .{ .tag = config.scratchpad_tag } },
-        .{ .mod = MODKEY | CTRL, .keysym = c.XKB_KEY_minus, .action = .{ .toggleview = config.scratchpad_tag } },
-        .{ .mod = MODKEY | CTRL | SHIFT, .keysym = c.XKB_KEY_underscore, .action = .{ .toggletag = config.scratchpad_tag } },
+        .{ .mod = MODKEY, .keysym = c.XKB_KEY_d, .action = .{ .setlayout = 3 } },
+        .{ .mod = MODKEY, .keysym = c.XKB_KEY_g, .action = .{ .togglefloating = {} } },
+        .{ .mod = MODKEY, .keysym = c.XKB_KEY_period, .action = .{ .togglescratch = {} } },
+        // shift + period = greater
+        .{ .mod = MODKEY, .keysym = c.XKB_KEY_greater, .action = .{ .tag = config.scratchpad_tag } },
+        .{ .mod = MODKEY, .keysym = c.XKB_KEY_comma, .action = .{ .toggleview = config.scratchpad_tag } },
+        // shift + comma = less
+        .{ .mod = MODKEY, .keysym = c.XKB_KEY_less, .action = .{ .toggletag = config.scratchpad_tag } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_q, .action = .{ .quit = {} } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_p, .action = .{ .toggleprivacy = {} } },
     };
