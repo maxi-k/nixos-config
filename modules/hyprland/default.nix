@@ -1,9 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [
-    ./home-manager.nix
-  ];
+  imports = [];
 
   home-manager.backupFileExtension = ''home-manager-backup'';
   programs.hyprland.enable = true;

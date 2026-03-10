@@ -209,14 +209,15 @@ pub const Button = struct {
 
 // ── Commands ───────────────────────────────────────────────────────────
 
-pub const term_bin = [_]const u8{"/run/current-system/sw/bin/alacritty"};
-pub const launcher_bin = [_]const u8{"/run/current-system/sw/bin/rofi"};
+pub const term_bin = "/run/current-system/sw/bin/alacritty";
+pub const launcher_bin =  "/run/current-system/sw/bin/rofi";
 
 pub const scratchpad_tag: u32 = 1 << 20;
 pub const term_cmd = [_][*:0]const u8{term_bin};
+pub const alt_term_cmd = [_][*:0]const u8{"/run/current-system/sw/bin/ghostty"};
 pub const emacs_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "emacs" };
 pub const scratchpad_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "emacs-scratchpad" };
-pub const menu_cmd = [_][*:0]const u8{ launcher_bin, "-mode" "combi" "-combi-modi", "window,run.ssh", "-show", "drun", "-theme", "material" };
+pub const menu_cmd = [_][*:0]const u8{ launcher_bin, "-mode", "combi", "-combi-modi", "window,run,ssh", "-show", "drun", "-theme", "material" };
 pub const window_cmd = [_][*:0]const u8{ launcher_bin, "-show", "window", "-theme", "material" };
 pub const screenshot_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "/run/current-system/sw/bin/grim -g \"$(/run/current-system/sw/bin/slurp)\" - | /run/current-system/sw/bin/wl-copy" };
 pub const calc_cmd = [_][*:0]const u8{ term_bin, "-e", "numbat" };
@@ -225,8 +226,8 @@ pub const lock_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "swaylock -c 000000" };
 pub const bar_cmd = [_][*:0]const u8{"/run/current-system/sw/bin/waybar"};
 pub const portal_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots && systemctl --user start xdg-desktop-portal xdg-desktop-portal-wlr" };
 pub const autostart_cmds = [_][]const [*:0]const u8{
-    // &bar_cmd,
-    &term_cmd
+    &bar_cmd,
+    // &term_cmd
     // Example idle/lock/DPMS workflow (disabled by default):
     // &[_][*:0]const u8{
     //     "/bin/sh",

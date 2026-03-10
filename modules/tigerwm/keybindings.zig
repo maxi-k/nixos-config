@@ -42,6 +42,7 @@ pub const keys = keys: {
     const core = [_]KeyBinding{
         // Spawn commands
         .{ .mod = MODKEY, .keysym = c.XKB_KEY_Return, .action = .{ .spawn = &config.term_cmd } },
+        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_Return, .action = .{ .spawn = &config.alt_term_cmd } },
         .{ .mod = MODKEY, .keysym = c.XKB_KEY_p, .action = .{ .spawn = &config.menu_cmd } },
         // .{ .mod = MODKEY, .keysym = c.XKB_KEY_p, .action = .{ .spawn = &config.window_cmd } },
         // .{ .mod = MODKEY, .keysym = c.XKB_KEY_s, .action = .{ .spawn = &config.screenshot_cmd } },

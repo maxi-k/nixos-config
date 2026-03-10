@@ -1,7 +1,11 @@
 { config, lib, pkgs, inputs, system, ... }:
 
 let
-  tigerwm_pkg = inputs.tigerwm.packages.${system}.default;
+  tigerwm_pkg = inputs.tigerwm.packages.${system}.default.override {
+    configFile = ./config.zig;
+    keybindingsFile = ./keybindings.zig;
+    xwayland = true;
+  };
   tigerwm = tigerwm_pkg.overrideAttrs (_: {
     postInstall =
       let
@@ -18,9 +22,6 @@ let
           echo "${tigerwmSession}" > $out/share/wayland-sessions/tigerwm.desktop
         '';
     passthru.providedSessions = [ "tigerwm" ];
-    xwayland = true;
-    configFile = ./config.zig;
-    keybindingsFile = ./keybindings.zig;
   });
 in
 {
@@ -34,9 +35,11 @@ in
     # })
   ];
 
-  environment.systemPackages = [
-    tigerwm
-  ];
+  environment.systemPackages = [tigerwm] ++ (with pkgs; [
+    waybar
+    rofi
+    swaylock
+  ]);
 
   services.displayManager.sessionPackages = [
     tigerwm
