@@ -205,7 +205,7 @@ pub const emacs_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "DISPLAY=:12 emacs" };
 pub const scratchpad_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "DISPLAY=:12 emacs-scratchpad" };
 pub const menu_cmd = [_][*:0]const u8{ launcher_bin  };
 pub const window_cmd = [_][*:0]const u8{ launcher_bin };
-pub const screenshot_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "/run/current-system/sw/bin/grim -g \"$(/run/current-system/sw/bin/slurp)\" - | /run/current-system/sw/bin/wl-copy" };
+pub const screenshot_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "grim -g \"$(slurp)\" - | tee /tmp/screenshot-$(date -Iseconds).png | wl-copy" };
 pub const calc_cmd = [_][*:0]const u8{ term_bin, "-e", "numbat" };
 pub const excel_cmd = [_][*:0]const u8{ "bin/sh", "-c", "libreoffice --calc" };
 pub const lock_cmd = [_][*:0]const u8{ "/bin/sh", "-kc", "swaylock -c 000000" };

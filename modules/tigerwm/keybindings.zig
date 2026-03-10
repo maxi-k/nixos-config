@@ -53,6 +53,7 @@ pub const keys = keys: {
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_c, .action = .{ .spawn = &config.calc_cmd } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_b, .action = .{ .spawn = &config.bluetooth_cmd } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_e, .action = .{ .spawn = &config.excel_cmd } },
+        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_s, .action = .{ .spawn = &config.screenshot_cmd } },
 
         // Kill client
         .{ .mod = MODKEY, .keysym = c.XKB_KEY_Q, .action = .{ .killclient = {} } },
