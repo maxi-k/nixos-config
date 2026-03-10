@@ -209,12 +209,20 @@ pub const screenshot_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "/run/current-syst
 pub const calc_cmd = [_][*:0]const u8{ term_bin, "-e", "numbat" };
 pub const excel_cmd = [_][*:0]const u8{ "bin/sh", "-c", "libreoffice --calc" };
 pub const lock_cmd = [_][*:0]const u8{ "/bin/sh", "-kc", "swaylock -c 000000" };
-pub const bar_cmd = [_][*:0]const u8{"/run/current-system/sw/bin/waybar"};
 pub const portal_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots && systemctl --user start xdg-desktop-portal xdg-desktop-portal-wlr" };
-pub const xwayland_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "xwayland-satellite :12" };
+pub const bluetooth_cmd = [_][*:0]const u8{ term_bin, "-e", "bluetoothctl" };
+
+const xwayland_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "xwayland-satellite :12" };
+const wallpaper_cmd = [_][*:0]const u8{ "awww-daemon" };
+const bar_cmd = [_][*:0]const u8{"waybar"};
+
 pub const autostart_cmds = [_][]const [*:0]const u8{
-    &xwayland_cmd,
     &bar_cmd,
+    &wallpaper_cmd,
+    &[_][*:0]const u8{
+       "aww img /home/maxi/.cache/bg" 
+    },
+    &xwayland_cmd,
     // &term_cmd
     // Example idle/lock/DPMS workflow (disabled by default):
     // &[_][*:0]const u8{
@@ -231,10 +239,19 @@ pub const TaggedAutostartCmd = struct {
 
 pub const autostart_tagged_cmds = [_]TaggedAutostartCmd{
     // Example: start one specific Emacs instance on scratchpad (one-shot).
-    // .{
-    //     .cmd = &[_][*:0]const u8{ "emacs", "--name", "scratch-emacs" },
-    //     .tag_mask = scratchpad_tag,
-    // },
+    .{
+        .cmd = &[_][*:0]const u8{ "/bin/sh", "-c", "emacs-scratchpad" },
+        .tag_mask = scratchpad_tag,
+    },
+};
+
+// ── Privacy Config ─────────────────────────────────────────────────────
+
+const c = @import("c.zig").c;
+pub const privacy_layers = [_]u32{
+    c.ZWLR_LAYER_SHELL_V1_LAYER_TOP,
+    c.ZWLR_LAYER_SHELL_V1_LAYER_OVERLAY,
+    c.ZWLR_LAYER_SHELL_V1_LAYER_BACKGROUND,
 };
 
 // ── XWayland ───────────────────────────────────────────────────────────

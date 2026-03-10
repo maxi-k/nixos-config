@@ -129,6 +129,6 @@
     doc.enable = true;
     dev.enable = true;
     # re-generate man cache for apropos, whatis, man -k
-    man.cache.enable = true;
+    # man.cache.enable = true; # <-- this takes forever
   };
 }
