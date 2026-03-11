@@ -50,8 +50,8 @@ pub const keys = keys: {
         .{ .mod = MODKEY, .keysym = c.XKB_KEY_e, .action = .{ .spawn = &config.emacs_cmd } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_u, .action = .{ .spawn = &config.lock_cmd } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_period, .action = .{ .spawn = &config.scratchpad_cmd } },
-        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_c, .action = .{ .spawn = &config.calc_cmd } },
-        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_b, .action = .{ .spawn = &config.bluetooth_cmd } },
+        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_c, .action = .{ .spawn_minor = &config.calc_cmd } },
+        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_b, .action = .{ .spawn_minor = &config.bluetooth_cmd } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_e, .action = .{ .spawn = &config.excel_cmd } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_s, .action = .{ .spawn = &config.screenshot_cmd } },
 

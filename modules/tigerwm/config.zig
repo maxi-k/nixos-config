@@ -214,15 +214,16 @@ pub const bluetooth_cmd = [_][*:0]const u8{ term_bin, "-e", "bluetoothctl" };
 
 const xwayland_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "xwayland-satellite :12" };
 const wallpaper_cmd = [_][*:0]const u8{ "awww-daemon" };
+const notification_cmd = [_][*:0]const u8{ "dunst" };
 const bar_cmd = [_][*:0]const u8{"waybar"};
 
 pub const autostart_cmds = [_][]const [*:0]const u8{
+    &portal_cmd,
+    &notification_cmd,
     &bar_cmd,
     &wallpaper_cmd,
-    &[_][*:0]const u8{
-       "aww img /home/maxi/.cache/bg" 
-    },
     &xwayland_cmd,
+    &[_][*:0]const u8{"/bin/sh", "-c", "mktheme"},
     // &term_cmd
     // Example idle/lock/DPMS workflow (disabled by default):
     // &[_][*:0]const u8{
