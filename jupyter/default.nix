@@ -8,7 +8,7 @@
     ../modules/development.nix
     ../modules/podman.nix
     ../modules/virtualization.nix
-  ] ++ lib.optional (builtins.pathExists ../local.nix) ../local.nix;
+  ];
 
   networking.hostName = "jupyter";
 

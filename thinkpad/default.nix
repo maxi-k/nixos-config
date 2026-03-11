@@ -2,8 +2,11 @@
 
 {
   imports = [
+    ./hardware-configuration.nix
     ../modules/bspwm.nix
     ../modules/development.nix
+    ../modules/laptop.nix
+    ../modules/tigerwm
   ];
 
   boot.supportedFilesystems = [ "ntfs" ];
@@ -43,16 +46,20 @@
     # linuxKernel.packages.linux_6_1.v4l2loopback
     # droidcam
   ];
+  # users.users.maxi.extraGroups = ["adbusers" "plugdev"];
 
-  services.tailscale.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
   
-  programs.adb.enable = true;
-  users.users.maxi.extraGroups = ["adbusers" "plugdev"];
   boot.kernelModules = [ "v4l2loopback" "usbhdi" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     # usbhdi
   ];
+  boot.kernelParams = [
+    # Force use of the thinkpad_acpi driver for backlight control.
+    # This allows the backlight save/load systemd service to work.
+    "acpi_backlight=native"
+  ];
+
 
   # when enabling multiple desktop environments
   # (e.g. plasma & gnome), need to specify this
@@ -63,6 +70,9 @@
   hardware = {  
      enableAllFirmware = true;
   }; 
+  # enable firmware update for `fwupdmgr update`
+  services.fwupd.enable = true;
+
 
   # services.pipewire = {
   #   enable = true;

@@ -144,17 +144,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1773179009,
-        "narHash": "sha256-HGCWRq6DORuZz7YIdgfr564M3mIRRAZjrZNXFd0uOyY=",
-        "ref": "refs/heads/feature/privacy_mode_hides_background",
-        "rev": "6e07c1144686f9c78b369b194660f3e1c67d626b",
-        "revCount": 1410,
+        "lastModified": 1773198074,
+        "narHash": "sha256-y6FSne2LbpZoF5jAdBDTCxOem11Yh17ZzT0ROBIPSuQ=",
+        "ref": "refs/heads/main",
+        "rev": "b91a3145960d3dd82dc9251fe4f8d630b41f02c6",
+        "revCount": 1411,
         "type": "git",
-        "url": "file:/home/maxi/dev/tigerwm"
+        "url": "ssh://git@github.com/toziegler/tigerWM.git"
       },
       "original": {
         "type": "git",
-        "url": "file:/home/maxi/dev/tigerwm"
+        "url": "ssh://git@github.com/toziegler/tigerWM.git"
       }
     }
   },

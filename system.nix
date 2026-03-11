@@ -64,7 +64,7 @@
 
   # Enable power management with tlp
   # already provided by gnome services.power-profiles-daemon
-  services.power-profiles-daemon.enable = true;
+  # services.power-profiles-daemon.enable = true;
   # services.tlp.enable = true;
 
   # Enable sound with pipewire.
