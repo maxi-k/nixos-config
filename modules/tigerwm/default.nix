@@ -38,13 +38,14 @@ in
   ];
 
   environment.systemPackages = [tigerwm] ++ (with pkgs; [
-    grim                                # grab images from wayland
-    slurp                               # select a region in wayland
     wl-clipboard                        # xclip equivalent
     rofi                                # generic launcher
     swaylock                            # screen locking
     xwayland-satellite                  # x session inside wayland
     inputs.awww.packages.${system}.awww # wallpaper daemon
+    grim                                # grab images from wayland
+    slurp                               # select a region in wayland
+    kooha                               # screen recording
   ]);
 
   services.displayManager.sessionPackages = [
@@ -105,7 +106,7 @@ in
           position = "bottom";
           modules-left = ["dwl/tags"];
           modules-center = ["dwl/window"];
-          modules-right = ["pulseaudio" "network" "battery" "clock" "tray" ];
+          modules-right = ["sway/language" "pulseaudio" "network" "battery" "clock" "tray" ];
 
           "dwl/tags" = {
             num-tags = 11;

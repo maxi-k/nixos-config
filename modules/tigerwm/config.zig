@@ -9,6 +9,7 @@ pub const max_clients: usize = 256;
 pub const max_monitors: usize = 8;
 pub const max_layer_surfaces: usize = 64;
 pub const max_keyboard_groups: usize = 4;
+pub const max_keyboard_devices: usize = 16;
 pub const max_pointer_constraints: usize = 8;
 pub const max_session_locks: usize = 2;
 pub const max_ipc_outputs: usize = 32;
@@ -47,15 +48,46 @@ pub const fullscreen_bg: Color = .{ 0.0, 0.0, 0.0, 1.0 };
 
 // ── Keyboard ───────────────────────────────────────────────────────────
 
-pub const repeat_rate: i32 = 25;
-pub const repeat_delay: i32 = 600;
+/// the layout cycling action cycles through these in order
+pub const KeyboardLayout = enum {
+    us,
+    de,
+};
 
-// XKB rule names (null means use system default)
+pub const KeyboardOption = enum {
+    ctrl_nocaps,
+    mac_layout,
+};
+
+pub fn keyboardLayoutToXkbName(layout: KeyboardLayout) [*:0]const u8 {
+    return @tagName(layout);
+}
+
+pub fn keyboardOptionToXkbName(option: KeyboardOption) [*:0]const u8 {
+    return switch (option) {
+        .ctrl_nocaps => "ctrl:nocaps",
+        .mac_layout => "altwin:swap_alt_win",
+    };
+}
+
+pub const keyboard_layouts = std.enums.values(KeyboardLayout);
+pub const keyboard_options = std.enums.values(KeyboardOption);
+
+pub const KeyboardLayoutAction = union(enum) {
+    cycle_layout,
+    toggle_option: KeyboardOption,
+};
+
+// XKB rule names (null means use system default).
+// Layouts/options are configured via the typed enums above.
 pub const xkb_rules: ?[*:0]const u8 = null;
 pub const xkb_model: ?[*:0]const u8 = null;
-pub const xkb_layout: ?[*:0]const u8 = null;
 pub const xkb_variant: ?[*:0]const u8 = null;
-pub const xkb_options: ?[*:0]const u8 = "ctrl:nocaps";
+// default keyboard options
+pub const xkb_options = [_]KeyboardOption{ .ctrl_nocaps };
+/// Other keyboard options
+pub const repeat_rate: i32 = 25;
+pub const repeat_delay: i32 = 600;
 
 // ── Trackpad ───────────────────────────────────────────────────────────
 
@@ -183,11 +215,44 @@ pub const Key = struct {
     arg: Arg,
 };
 
-pub const Button = struct {
+pub const ButtonAction = union(enum) {
+    moveresize: MouseDragMode,
+    togglefloating: void,
+};
+
+pub const MouseDragMode = enum {
+    /// "Smart" move:
+    /// - if the grabbed client is floating (or the layout can't be adjusted): move window geometry
+    /// - if the grabbed client is tiled (and the current layout supports it): adjust mfact
+    move,
+
+    /// Legacy move: always float the client and move window geometry.
+    move_float,
+
+    /// "Smart" resize:
+    /// - if the grabbed client is floating: resize the window geometry
+    /// - if the grabbed client is tiled (and the current layout supports it): adjust mfact
+    resize,
+
+    /// Legacy resize: always float the client and resize window geometry.
+    resize_float,
+};
+
+pub const ButtonBinding = struct {
     mod: u32,
     button: u32,
-    action: ActionFn,
-    arg: Arg,
+    action: ButtonAction,
+};
+
+// Linux input event codes used by button bindings.
+pub const BTN_LEFT: u32 = 0x110;
+pub const BTN_RIGHT: u32 = 0x111;
+pub const BTN_MIDDLE: u32 = 0x112;
+
+pub const buttons: []const ButtonBinding = &.{
+    .{ .mod = mod_key, .button = BTN_LEFT, .action = .{ .moveresize = .move } },
+    .{ .mod = mod_key, .button = BTN_MIDDLE, .action = .{ .togglefloating = {} } },
+    .{ .mod = mod_key, .button = BTN_RIGHT, .action = .{ .moveresize = .resize } },
 };
 
 // Key and button binding tables are populated in input.zig after action functions exist.

@@ -26,6 +26,7 @@ pub const Action = union(enum) {
     chvt: u32,
     togglescratch: void,
     toggleprivacy: void,
+    keyboard_layout: config.KeyboardLayoutAction,
 };
 
 pub const KeyBinding = struct {
@@ -93,6 +94,11 @@ pub const keys = keys: {
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_greater, .action = .{ .toggletag = config.scratchpad_tag } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_Delete, .action = .{ .quit = {} } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_p, .action = .{ .toggleprivacy = {} } },
+
+
+        // Keyboard Layout
+        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_space, .action = .{ .keyboard_layout = .cycle_layout } },
+        .{ .mod = MODKEY | CTRL, .keysym = c.XKB_KEY_space, .action = .{ .keyboard_layout = .{ .toggle_option = .mac_layout } } },
     };
 
     const tag_bindings = blk: {
