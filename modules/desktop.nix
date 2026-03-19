@@ -16,6 +16,7 @@
     hunspellDicts.de_DE
     hunspellDicts.en_US
     # utility programs
+    nautilus
     libreoffice-fresh
     sxiv
     zathura

@@ -89,8 +89,9 @@ in
           color: #cccccc;
         }
         #tags button.focused {
-          color: #ffffff;
-          background-color: rgba(0, 85, 119, 0.4);
+          background-color: rgba(127, 127, 127, 0.4);
+          color: #eeeeee;
+          border-bottom: .1em solid #eeeeee; 
         }
         #tags button.urgent {
           color: #ff0000;

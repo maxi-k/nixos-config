@@ -56,6 +56,11 @@ pub const keys = keys: {
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_e, .action = .{ .spawn = &config.excel_cmd } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_s, .action = .{ .spawn = &config.screenshot_cmd } },
 
+        // Media controls
+        .{ .mod = 0, .keysym = c.XKB_KEY_XF86AudioPlay, .action = .{ .spawn_minor = &config.media_play_pause_cmd } },
+        .{ .mod = 0, .keysym = c.XKB_KEY_XF86AudioNext, .action = .{ .spawn_minor = &config.media_next_cmd } },
+        .{ .mod = 0, .keysym = c.XKB_KEY_XF86AudioPrev, .action = .{ .spawn_minor = &config.media_prev_cmd } },
+
         // Kill client
         .{ .mod = MODKEY, .keysym = c.XKB_KEY_Q, .action = .{ .killclient = {} } },
 

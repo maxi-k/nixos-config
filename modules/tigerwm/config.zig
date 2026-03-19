@@ -15,6 +15,9 @@ pub const max_session_locks: usize = 2;
 pub const max_ipc_outputs: usize = 32;
 pub const max_cursor_devices: usize = 16;
 pub const max_popup_trackers: usize = 64;
+pub const max_tablet_devices: usize = 16;
+pub const max_tablet_pads: usize = 16;
+pub const max_tablet_tools: usize = 8;
 
 // ── Tags ───────────────────────────────────────────────────────────────
 
@@ -23,7 +26,7 @@ pub const tag_count: u5 = 10;
 
 // ── Appearance ─────────────────────────────────────────────────────────
 
-pub const border_px: u32 = 2;
+pub const border_px: u32 = 3;
 pub const monitor_border_flash_ms: u32 = 300;
 pub const sloppy_focus: bool = true;
 pub const bypass_surface_visibility: bool = false;
@@ -41,8 +44,10 @@ pub fn hexColor(comptime hex: u32) Color {
 }
 
 pub const root_color: Color = hexColor(0x222222ff);
-pub const border_color: Color = hexColor(0x444444ff);
-pub const focus_color: Color = hexColor(0x005577ff);
+// pub const border_color: Color = hexColor(0x444444ff);
+// pub const focus_color: Color = hexColor(0x005577ff);
+pub const border_color: Color = hexColor(0x30302fff);
+pub const focus_color: Color = hexColor(0x7f7f7fff);
 pub const urgent_color: Color = hexColor(0xff0000ff);
 pub const fullscreen_bg: Color = .{ 0.0, 0.0, 0.0, 1.0 };
 
@@ -94,7 +99,7 @@ pub const repeat_delay: i32 = 600;
 pub const tap_to_click: bool = true;
 pub const tap_and_drag: bool = true;
 pub const drag_lock: bool = true;
-pub const natural_scrolling: bool = true;
+pub const natural_scrolling: bool = false;
 pub const disable_while_typing: bool = true;
 pub const left_handed: bool = false;
 pub const middle_button_emulation: bool = false;
@@ -276,6 +281,9 @@ pub const excel_cmd = [_][*:0]const u8{ "bin/sh", "-c", "libreoffice --calc" };
 pub const lock_cmd = [_][*:0]const u8{ "/bin/sh", "-kc", "swaylock -c 000000" };
 pub const portal_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots && systemctl --user start xdg-desktop-portal xdg-desktop-portal-wlr" };
 pub const bluetooth_cmd = [_][*:0]const u8{ term_bin, "-e", "bluetoothctl" };
+pub const media_play_pause_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "playerctl play-pause" };
+pub const media_next_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "playerctl next" };
+pub const media_prev_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "playerctl previous" };
 
 const xwayland_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "xwayland-satellite :12" };
 const wallpaper_cmd = [_][*:0]const u8{ "awww-daemon" };

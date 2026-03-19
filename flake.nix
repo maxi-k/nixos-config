@@ -8,8 +8,9 @@
      inputs.nixpkgs.follows = "nixpkgs";
     };
     tigerwm = {
-      url = "git+ssh://git@github.com/toziegler/tigerWM.git";
-      #url = "git+file:/home/maxi/dev/tigerwm";
+      # url = "git+ssh://git@github.com/toziegler/tigerWM.git";
+      url = "path:/home/maxi/dev/tigerwm";
+      # url = "git+file:/home/maxi/dev/tigerwm";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     awww = {
