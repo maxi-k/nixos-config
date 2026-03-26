@@ -17,9 +17,13 @@
       url = "git+https://codeberg.org/LGFae/awww"; 
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lispwm = {
+      url = "path:/home/maxi/dev/lispwm";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, tigerwm, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, tigerwm, lispwm, ... }:
 
     let
       system = "x86_64-linux"; 

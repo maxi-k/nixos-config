@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../modules/tigerwm
+    ../modules/lispwm.nix
     ../modules/bspwm.nix
     ../modules/development.nix
     ../modules/podman.nix
