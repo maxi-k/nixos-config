@@ -20,4 +20,8 @@ vm: update-inputs
 	nixos-rebuild build-vm --flake .#$(shell hostname)
 .PHONY: vm
 
+live-usb: update-inputs
+	nix build .#nixosConfigurations.live-usb.config.system.build.isoImage --impure
+.PHONY: vm
+
 # end

@@ -99,7 +99,7 @@ pub const repeat_delay: i32 = 600;
 pub const tap_to_click: bool = true;
 pub const tap_and_drag: bool = true;
 pub const drag_lock: bool = true;
-pub const natural_scrolling: bool = false;
+pub const natural_scrolling: bool = true;
 pub const disable_while_typing: bool = true;
 pub const left_handed: bool = false;
 pub const middle_button_emulation: bool = false;
@@ -138,8 +138,28 @@ pub const MonitorRule = struct {
     transform: u32, // wl_output_transform
     x: i32,
     y: i32,
+    /// Tag assignment priority for split-tags mode. Lower = higher priority
+    /// (gets tags first). null = auto-distribute after prioritized monitors.
+    tag_priority: ?u32 = null,
 };
 pub const monitor_rules = [_]MonitorRule{
+    // tb office
+    .{
+        .name = null,
+        .make = null,
+        .model = null,
+        .serial = "511NTFAFP507",
+        .description = null,
+        .mfact = 0.55,
+        .nmaster = 1,
+        .scale = 1.5,
+        .layout_idx = 0,
+        .transform = 0,
+        .x = 3840,
+        .y = 2160,
+        .tag_priority = 1
+    },
+    // home office
     .{
         .name = null,
         .make = null,
@@ -151,8 +171,9 @@ pub const monitor_rules = [_]MonitorRule{
         .scale = 1.0,
         .layout_idx = 0,
         .transform = 0,
-        .x = 2560,
-        .y = 1440,
+        .x = 0,
+        .y = 0,
+        .tag_priority = 0
     },
     .{
         .name = null,
@@ -167,6 +188,7 @@ pub const monitor_rules = [_]MonitorRule{
         .transform = 0,
         .x = -1,
         .y = -1,
+        .tag_priority = 0
     },
 };
 

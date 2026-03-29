@@ -18,6 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lispwm = {
+      # url = "git+ssh://git@github.com/maxi-k/lispwm.git";
       url = "path:/home/maxi/dev/lispwm";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -27,6 +28,12 @@
 
     let
       system = "x86_64-linux"; 
+      user = {
+        name = "maxi";
+        homedir = "/home/maxi";
+        fullName = "Maximilian Kuschewski";
+      };
+      localModulePath = "${user.homedir}/dev/nixos-config/local.nix";
 
       overlays = [];
 
@@ -42,17 +49,12 @@
         ./system.nix
         ./user.nix
         home-manager.nixosModules.home-manager
-      ] ++ pkgs.lib.optional (builtins.pathExists ./local.nix) ./local.nix;
+      ] ++ pkgs.lib.optional (builtins.pathExists localModulePath) localModulePath;
 
       hostModules = {
-        jupyter = ./jupyter;
-        thinkpad-maxi = ./thinkpad;
-      };
-
-      user = {
-        name = "maxi";
-        homedir = "/home/maxi";
-        fullName = "Maximilian Kuschewski";
+        jupyter = ./hosts/jupyter;
+        thinkpad-maxi = ./hosts/thinkpad;
+        live-usb = ./hosts/live-usb.nix;
       };
 
       buildHost = name:

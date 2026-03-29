@@ -3,12 +3,12 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../modules/tigerwm
-    ../modules/lispwm.nix
-    ../modules/bspwm.nix
-    ../modules/development.nix
-    ../modules/podman.nix
-    ../modules/virtualization.nix
+    ../../modules/tigerwm
+    ../../modules/lispwm.nix
+    ../../modules/bspwm.nix
+    ../../modules/development.nix
+    ../../modules/podman.nix
+    ../../modules/virtualization.nix
   ];
 
   networking.hostName = "jupyter";
@@ -31,7 +31,6 @@
       steam-devices-udev-rules
   ];
 
-  services.tailscale.enable = true;
   # steam package + some tweaks
   programs.steam.enable = true;
   # set java version

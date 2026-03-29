@@ -46,6 +46,7 @@ in
     grim                                # grab images from wayland
     slurp                               # select a region in wayland
     kooha                               # screen recording
+    wdisplays
   ]);
 
   services.displayManager.sessionPackages = [

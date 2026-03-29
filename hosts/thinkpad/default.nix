@@ -3,10 +3,12 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../modules/bspwm.nix
-    ../modules/development.nix
-    ../modules/laptop.nix
-    ../modules/tigerwm
+    ../../modules/desktop.nix
+    ../../modules/bspwm.nix
+    ../../modules/development.nix
+    ../../modules/laptop.nix
+    ../../modules/tigerwm
+    ../../modules/river.nix
   ];
 
   boot.supportedFilesystems = [ "ntfs" ];
@@ -72,6 +74,7 @@
   }; 
   # enable firmware update for `fwupdmgr update`
   services.fwupd.enable = true;
+  services.tailscale.enable = true;
 
 
   # services.pipewire = {

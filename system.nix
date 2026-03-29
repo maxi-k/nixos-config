@@ -17,6 +17,10 @@
     enableIPv6  = true;
   };
 
+  # Enable my VPN services
+  services.tailscale.enable = true;
+  services.mullvad-vpn.enable = true;
+
   # Set time zone.
   time.timeZone = "Europe/Berlin";
 
@@ -38,34 +42,6 @@
     # inputMethod.ibus.engines = with pkgs.ibus-engines; [ uniemoji ];
     # inputMethod.enabled = "ibus";
   };
-
-  services.displayManager.defaultSession = "none+bspwm";
-  services.displayManager.ly.enable = true; #
-  services.xserver = {
-    # Enable the X11 windowing system.
-    enable = true;
-
-    # Enable BSPWM and set as default
-    windowManager.bspwm.enable = true;
-
-    # Enable the GNOME Desktop Environment.
-    # desktopManager.gnome.enable = true;
-    # desktopManager.plasma5.enable = true;
-
-    # Configure keymap in X11
-    xkb.layout = "us,de";
-    xkb.variant = "";
-    # xkbOptions = "grp:win_space_toggle";
-    xkb.options = "caps:escape,escape:";
-  };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable power management with tlp
-  # already provided by gnome services.power-profiles-daemon
-  # services.power-profiles-daemon.enable = true;
-  # services.tlp.enable = true;
 
   # Enable sound with pipewire.
   # sound.enable = true; # pre 24.05
@@ -104,23 +80,6 @@
   programs.command-not-found.enable = true;
   # Enable nix-direnv for automatically loading shell.nix files
   programs.direnv.enable = true;
-
-  # font packages
-  fonts.packages = with pkgs; [
-      # icons
-      emacs-all-the-icons-fonts
-      nerd-fonts.symbols-only
-      nerd-fonts.noto
-      nerd-fonts.hack
-      nerd-fonts.droid-sans-mono
-      font-awesome
-      noto-fonts-color-emoji
-      # emacs variable-pitch font
-      inter
-      # monospace font
-      jetbrains-mono
-      libertinus
-  ];
 
   documentation = {
     # enable dev documentation (manpages)

@@ -2,6 +2,11 @@
 
 {
   imports = [ ./desktop.nix ];
+
+  # Enable BSPWM and set as default
+  services.xserver.windowManager.bspwm.enable = true;
+  services.displayManager.defaultSession = "none+bspwm";
+
   environment.systemPackages = with pkgs; [
      bspwm
      sxhkd
