@@ -7,6 +7,10 @@
      url = "github:nix-community/home-manager"; 
      inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     tigerwm = {
       url = "git+ssh://git@github.com/toziegler/tigerWM.git";
       inputs.nixpkgs.follows = "nixpkgs";
