@@ -50,6 +50,7 @@
         ./system.nix
         ./user.nix
         ./modules/home-manager.nix
+        ./modules/agenix.nix
       ] ++ pkgs.lib.optional (builtins.pathExists localModulePath) localModulePath;
 
       hostModules = {
