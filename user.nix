@@ -20,17 +20,10 @@
    user = user.name;
    dataDir = user.homedir;
   };
-
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.users.${user.name} = {pkgs, ...}: {
-    home.homeDirectory = user.homedir;
-    home.packages = with pkgs; [      
+  hm = { pkgs, ... }: {
+    home.packages = with pkgs; [
       cryptomator
     ];
-    /* The home.stateVersion option does not have a default and must be set */
-    home.stateVersion = "25.05";
-    /* Here goes the rest of your home-manager config, e.g. home.packages = [ pkgs.foo ]; */
   };
 
 }

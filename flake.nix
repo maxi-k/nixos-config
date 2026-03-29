@@ -45,7 +45,7 @@
       sharedModules = [
         ./system.nix
         ./user.nix
-        home-manager.nixosModules.home-manager
+        ./modules/home-manager.nix
       ] ++ pkgs.lib.optional (builtins.pathExists localModulePath) localModulePath;
 
       hostModules = {

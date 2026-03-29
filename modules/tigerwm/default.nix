@@ -64,7 +64,7 @@ in
     "L+ /usr/libexec/xdg-desktop-portal - - - - ${pkgs.xdg-desktop-portal}/libexec/xdg-desktop-portal"
   ];
 
-  home-manager.users.${user.name}.programs = {
+  hm.programs = {
     swaylock = {
       enable = true;
       package = pkgs.swaylock-effects;

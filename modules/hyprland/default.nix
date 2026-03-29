@@ -3,9 +3,8 @@
 {
   imports = [];
 
-  home-manager.backupFileExtension = ''home-manager-backup'';
   programs.hyprland.enable = true;
-  home-manager.users.maxi = { pkgs, ... }: {
+  hm = { pkgs, ... }: {
     imports = [
       pkgs.inputs.noctalia.homeModules.default
     ];
