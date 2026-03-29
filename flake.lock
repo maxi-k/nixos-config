@@ -124,14 +124,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1774565284,
-        "narHash": "sha256-EpGkGh7PiYcR+/fYYdJOBOXvo++mLWs+lEWsza3uESw=",
-        "path": "/home/maxi/dev/lispwm",
-        "type": "path"
+        "lastModified": 1774563473,
+        "narHash": "sha256-xeSQb1hAEjCfqt6ImzR5w5YwhLG+JkYrYff+7FLAY2g=",
+        "ref": "refs/heads/master",
+        "rev": "118aac43f8b756287c4e9e3094fbd1e695226918",
+        "revCount": 4,
+        "type": "git",
+        "url": "ssh://git@github.com/maxi-k/lispwm.git"
       },
       "original": {
-        "path": "/home/maxi/dev/lispwm",
-        "type": "path"
+        "type": "git",
+        "url": "ssh://git@github.com/maxi-k/lispwm.git"
       }
     },
     "nixpkgs": {
@@ -218,14 +221,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1774468653,
-        "narHash": "sha256-vjQjjV/ytBJPx21l3mWoGbODCby0v9DRMxal/arOOG4=",
-        "path": "/home/maxi/dev/tigerwm",
-        "type": "path"
+        "lastModified": 1774365541,
+        "narHash": "sha256-gNCNivtng++F4ZJsRLRyMo3w+sNImw1oUhJcOAczMWk=",
+        "ref": "refs/heads/main",
+        "rev": "729830828aa8f9596abac032c688cb18fda6071d",
+        "revCount": 1435,
+        "type": "git",
+        "url": "ssh://git@github.com/toziegler/tigerWM.git"
       },
       "original": {
-        "path": "/home/maxi/dev/tigerwm",
-        "type": "path"
+        "type": "git",
+        "url": "ssh://git@github.com/toziegler/tigerWM.git"
       }
     }
   },

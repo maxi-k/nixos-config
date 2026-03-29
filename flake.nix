@@ -8,9 +8,7 @@
      inputs.nixpkgs.follows = "nixpkgs";
     };
     tigerwm = {
-      # url = "git+ssh://git@github.com/toziegler/tigerWM.git";
-      url = "path:/home/maxi/dev/tigerwm";
-      # url = "git+file:/home/maxi/dev/tigerwm";
+      url = "git+ssh://git@github.com/toziegler/tigerWM.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     awww = {
@@ -18,8 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lispwm = {
-      # url = "git+ssh://git@github.com/maxi-k/lispwm.git";
-      url = "path:/home/maxi/dev/lispwm";
+      url = "git+ssh://git@github.com/maxi-k/lispwm.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

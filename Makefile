@@ -4,24 +4,33 @@
 # @file
 # @version 0.1
 
+HOSTNAME := $(shell hostname)
+TIGERWM_PATH ?= /home/maxi/dev/tigerwm
+LISPWM_PATH ?= /home/maxi/dev/lispwm
+TIGERWM_INPUT ?= $(if $(wildcard $(TIGERWM_PATH)/flake.nix),path:$(TIGERWM_PATH),)
+LISPWM_INPUT ?= $(if $(wildcard $(LISPWM_PATH)/flake.nix),path:$(LISPWM_PATH),)
+OVERRIDE_INPUT_ARGS := \
+	$(if $(TIGERWM_INPUT),--override-input tigerwm $(TIGERWM_INPUT),) \
+	$(if $(LISPWM_INPUT),--override-input lispwm $(LISPWM_INPUT),)
+
 update-inputs:
-	nix flake lock --update-input tigerwm 
+	nix flake lock --update-input tigerwm --update-input lispwm
 .PHONY: update-inputs
 
 switch: update-inputs
-	nixos-rebuild switch --flake .#$(shell hostname)
+	nixos-rebuild switch --flake .#$(HOSTNAME) --impure $(OVERRIDE_INPUT_ARGS)
 .PHONY: switch
 
 test: update-inputs
-	nixos-rebuild test --flake .#$(shell hostname)
-.PHONY: switch
+	nixos-rebuild test --flake .#$(HOSTNAME) --impure $(OVERRIDE_INPUT_ARGS)
+.PHONY: test
 
 vm: update-inputs
-	nixos-rebuild build-vm --flake .#$(shell hostname)
+	nixos-rebuild build-vm --flake .#$(HOSTNAME) --impure $(OVERRIDE_INPUT_ARGS)
 .PHONY: vm
 
 live-usb: update-inputs
 	nix build .#nixosConfigurations.live-usb.config.system.build.isoImage --impure
-.PHONY: vm
+.PHONY: live-usb
 
 # end
