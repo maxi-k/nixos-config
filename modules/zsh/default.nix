@@ -7,6 +7,12 @@
       dotDir = ".config/zsh";
     };
 
+    programs.zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+      options = [ "--cmd" "z" ];
+    };
+
     home.file = {
       ".zprofile".source = ./dotfiles/.zprofile;
       ".config/zsh/.zshrc".source = ./dotfiles/.zshrc;
