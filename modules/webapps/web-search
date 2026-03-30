@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+set -eu
+
+query=${1:-}
+if [ -z "$query" ]; then
+  echo "usage: $0 <query>"
+  exit 1
+fi
+
+exec brave "https://search.brave.com/search?q=$(printf '%s' "$query" | sed 's/ /%20/g')"

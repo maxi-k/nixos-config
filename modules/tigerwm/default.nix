@@ -39,7 +39,6 @@ in
 
   environment.systemPackages = [tigerwm] ++ (with pkgs; [
     wl-clipboard                        # xclip equivalent
-    rofi                                # generic launcher
     swaylock                            # screen locking
     xwayland-satellite                  # x session inside wayland
     inputs.awww.packages.${system}.awww # wallpaper daemon

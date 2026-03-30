@@ -19,13 +19,15 @@
     git
   ];
 
-  hm.home.file.".local/bin/doom-install" = {
-    source = ./doom-install;
-    executable = true;
-  };
-
-  hm.home.file.".local/bin/emacs-scratchpad" = {
-    source = ./emacs-scratchpad;
-    executable = true;
+  hm = { addHomeBinary, ... }: {
+    home.file = {}
+      // addHomeBinary "doom-install" {
+        source = ./doom-install;
+        executable = true;
+      }
+      // addHomeBinary "emacs-scratchpad" {
+        source = ./emacs-scratchpad;
+        executable = true;
+      };
   };
 }

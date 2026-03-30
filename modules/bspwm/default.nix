@@ -18,58 +18,69 @@
     tabbed
   ];
 
-  hm = {
-    home.file = {
-      ".config/bspwm/bspwmrc" = {
+  hm = { addHomeBinary, addHomeConfig, ... }: {
+    home.file = {}
+      // addHomeConfig "bspwm/bspwmrc" {
         source = ./bspwmrc;
         executable = true;
-      };
-      ".config/sxhkd/sxhkdrc".source = ./sxhkdrc;
-      ".local/bin/bspwm-choose-layout" = {
+      }
+      // addHomeConfig "sxhkd/sxhkdrc" {
+        source = ./sxhkdrc;
+      }
+      // addHomeBinary "bspwm-choose-layout" {
         source = ./bin/bspwm-choose-layout;
         executable = true;
-      };
-      ".local/bin/bspwm-hide-window" = {
+      }
+      // addHomeBinary "bspwm-hide-window" {
         source = ./bin/bspwm-hide-window;
         executable = true;
-      };
-      ".local/bin/bspwm-get-proportionate-rectangle" = {
+      }
+      // addHomeBinary "bspwm-get-proportionate-rectangle" {
         source = ./bin/bspwm-get-proportionate-rectangle;
         executable = true;
-      };
-      ".local/bin/bspwm-scratch-program" = {
+      }
+      // addHomeBinary "bspwm-scratch-program" {
         source = ./bin/bspwm-scratch-program;
         executable = true;
-      };
-      ".local/bin/start-keybindings" = {
+      }
+      // addHomeBinary "start-keybindings" {
         source = ./bin/start-keybindings;
         executable = true;
-      };
-      ".local/bin/list-keybindings" = {
+      }
+      // addHomeBinary "list-keybindings" {
         source = ./bin/list-keybindings;
         executable = true;
-      };
-      ".local/bin/external-monitor" = {
+      }
+      // addHomeBinary "external-monitor" {
         source = ./bin/external-monitor;
         executable = true;
-      };
-      ".local/bin/tabc.sh" = {
+      }
+      // addHomeBinary "tabc.sh" {
         source = ./bin/tabc.sh;
         executable = true;
-      };
-      ".local/bin/powermenu-gui" = {
+      }
+      // addHomeBinary "powermenu-gui" {
         source = ./bin/powermenu-gui;
         executable = true;
-      };
-      ".config/polybar/config.ini".source = ./polybar/config.ini;
-      ".config/polybar/colors.conf".source = ./polybar/colors.conf;
-      ".config/polybar/modules.conf".source = ./polybar/modules.conf;
-      ".config/polybar/wm.conf".source = ./polybar/wm.conf;
-      ".config/polybar/bars.conf".source = ./polybar/bars.conf;
-      ".config/polybar/start.sh" = {
+      }
+      // addHomeConfig "polybar/config.ini" {
+        source = ./polybar/config.ini;
+      }
+      // addHomeConfig "polybar/colors.conf" {
+        source = ./polybar/colors.conf;
+      }
+      // addHomeConfig "polybar/modules.conf" {
+        source = ./polybar/modules.conf;
+      }
+      // addHomeConfig "polybar/wm.conf" {
+        source = ./polybar/wm.conf;
+      }
+      // addHomeConfig "polybar/bars.conf" {
+        source = ./polybar/bars.conf;
+      }
+      // addHomeConfig "polybar/start.sh" {
         source = ./polybar/start.sh;
         executable = true;
       };
-    };
   };
 }

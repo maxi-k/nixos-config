@@ -26,6 +26,9 @@
 
   environment.systemPackages = with pkgs; [
     networkmanager
+    networkmanagerapplet
+    glib
+    xdg-utils
     blueman bluez
     brightnessctl
     playerctl
@@ -41,7 +44,6 @@
     imagemagick ghostscript
     ncdu
     nix-tree
-    brave
     spotify
   ];
 }

@@ -1,4 +1,4 @@
-{ pkgs, user, ... }:
+{ pkgs, ... }:
 
 let
   xprofile = ./xprofile;
@@ -48,46 +48,47 @@ in
     startThemedApps
   ];
 
-  hm = {
-    home.file.".xprofile" = {
-      source = xprofile;
-      executable = true;
-    };
-    home.file.".config/wal/postrun" = {
-      source = ./wal/postrun;
-      executable = true;
-    };
-    home.file.".local/bin/x-mac-layout" = {
-      source = ./bin/x-mac-layout;
-      executable = true;
-    };
-    home.file.".local/bin/x-cycle-layout" = {
-      source = ./bin/x-cycle-layout;
-      executable = true;
-    };
-    home.file.".local/bin/x-caps-is-escape" = {
-      source = ./bin/x-caps-is-escape;
-      executable = true;
-    };
-    home.file.".local/bin/x-switch-layout" = {
-      source = ./bin/x-switch-layout;
-      executable = true;
-    };
-    home.file.".local/bin/day-mode" = {
-      source = ./bin/day-mode;
-      executable = true;
-    };
-    home.file.".local/bin/night-mode" = {
-      source = ./bin/night-mode;
-      executable = true;
-    };
-    home.file.".local/bin/dopen" = {
-      source = ./bin/dopen;
-      executable = true;
-    };
-    home.file.".local/bin/lock" = {
-      source = ./bin/lock;
-      executable = true;
-    };
+  hm = { addHomeFile, addHomeBinary, addHomeConfig, ... }: {
+    home.file = {}
+      // addHomeFile ".xprofile" {
+        source = xprofile;
+        executable = true;
+      }
+      // addHomeConfig "wal/postrun" {
+        source = ./wal/postrun;
+        executable = true;
+      }
+      // addHomeBinary "x-mac-layout" {
+        source = ./bin/x-mac-layout;
+        executable = true;
+      }
+      // addHomeBinary "x-cycle-layout" {
+        source = ./bin/x-cycle-layout;
+        executable = true;
+      }
+      // addHomeBinary "x-caps-is-escape" {
+        source = ./bin/x-caps-is-escape;
+        executable = true;
+      }
+      // addHomeBinary "x-switch-layout" {
+        source = ./bin/x-switch-layout;
+        executable = true;
+      }
+      // addHomeBinary "day-mode" {
+        source = ./bin/day-mode;
+        executable = true;
+      }
+      // addHomeBinary "night-mode" {
+        source = ./bin/night-mode;
+        executable = true;
+      }
+      // addHomeBinary "dopen" {
+        source = ./bin/dopen;
+        executable = true;
+      }
+      // addHomeBinary "lock" {
+        source = ./bin/lock;
+        executable = true;
+      };
   };
 }

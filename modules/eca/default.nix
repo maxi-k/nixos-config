@@ -1,9 +1,11 @@
-{ lib, user, ... }:
+{ lib, pkgs, user, ... }:
 
 let
   braveApiKeySecret = ./brave-api-key.age;
 in
 {
+  environment.systemPackages = [ pkgs.curl ];
+
   repo.secrets.files = lib.optionalAttrs (builtins.pathExists braveApiKeySecret) {
     eca-brave-api-key = {
       file = braveApiKeySecret;
@@ -14,9 +16,16 @@ in
     };
   };
 
-  hm.home.file = {
-    ".config/eca/config.json".source = ./config.json;
-    ".config/eca/commands/rewrite.md".source = ./commands/rewrite.md;
-    ".config/eca/behaviors/writing-assistant.md".source = ./behaviors/writing-assistant.md;
+  hm = { addHomeConfig, ... }: {
+    home.file = {}
+      // addHomeConfig "eca/config.json" {
+        source = ./config.json;
+      }
+      // addHomeConfig "eca/commands/rewrite.md" {
+        source = ./commands/rewrite.md;
+      }
+      // addHomeConfig "eca/behaviors/writing-assistant.md" {
+        source = ./behaviors/writing-assistant.md;
+      };
   };
 }

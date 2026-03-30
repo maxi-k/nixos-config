@@ -49,8 +49,10 @@ in
       };
     };
 
-  hm.home.file.".ssh/config" = {
-    text = if sshConfigIncludes != "" then sshConfigIncludes else "# Managed by Home Manager\n";
-    force = true;
+  hm = { addHomeFile, ... }: {
+    home.file = addHomeFile ".ssh/config" {
+      text = if sshConfigIncludes != "" then sshConfigIncludes else "# Managed by Home Manager\n";
+      force = true;
+    };
   };
 }

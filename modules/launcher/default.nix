@@ -1,22 +1,35 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
+let
+  cfg = config.repo.launcher;
+in
 {
-  environment.systemPackages = with pkgs; [
-    rofi
-  ];
+  options.repo.launcher.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = true;
+    description = "Whether to install the launcher abstraction and its rofi-backed tools.";
+  };
 
-  hm.home.file = {
-    ".local/bin/launcher" = {
-      source = ./launcher;
-      executable = true;
-    };
-    ".local/bin/selector" = {
-      source = ./selector;
-      executable = true;
-    };
-    ".local/bin/run-flatpak" = {
-      source = ./run-flatpak;
-      executable = true;
+  config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      rofi
+      flatpak
+    ];
+
+    hm = { addHomeBinary, ... }: {
+      home.file = {}
+        // addHomeBinary "launcher" {
+          source = ./launcher;
+          executable = true;
+        }
+        // addHomeBinary "selector" {
+          source = ./selector;
+          executable = true;
+        }
+        // addHomeBinary "run-flatpak" {
+          source = ./run-flatpak;
+          executable = true;
+        };
     };
   };
 }
