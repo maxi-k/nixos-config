@@ -1,0 +1,37 @@
+#!/bin/sh
+
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias ..='cd ../'
+
+alias cdc='pwd | pbcopy'
+alias cdp='cd $(pbpaste)'
+
+alias ec='emacsclient -nw'
+
+command -v vim &>/dev/null && alias vi='vim'
+command -v nvim &>/dev/null && alias vi='nvim'
+
+alias tml="tmux list-sessions"
+alias tma="tmux -2 attach -t $1"
+alias tmk="tmux kill-session -t $1"
+
+alias sl='sl -e'
+alias mj='make -j32'
+
+alias du-gui='ncdu'
+
+fcd() {
+    local dir;
+    while true; do
+        dir="$(ls -a1p | grep '/$' | grep -v '^./$' | fzf --height 40% --reverse --no-multi --preview 'pwd' --preview-window=up,1,border-none --no-info)"
+        test -z "${dir}" && break || cd "${dir}"
+    done
+}
+
+alias docker=podman
+command -v nix >/dev/null && alias findpkg='nix search nixpkgs'
+
+alias set-default-app="xdg-mime default"

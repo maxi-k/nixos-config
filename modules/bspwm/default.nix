@@ -12,7 +12,6 @@
     bspwm
     sxhkd
     bsp-layout
-    rofi
     devour
     (polybar.override { pulseSupport = true; })
     xsecurelock
@@ -42,6 +41,15 @@
       };
       ".local/bin/bspwm-scratch-program" = {
         source = ./bin/bspwm-scratch-program;
+        executable = true;
+      };
+      ".config/polybar/config.ini".source = ./polybar/config.ini;
+      ".config/polybar/colors.conf".source = ./polybar/colors.conf;
+      ".config/polybar/modules.conf".source = ./polybar/modules.conf;
+      ".config/polybar/wm.conf".source = ./polybar/wm.conf;
+      ".config/polybar/bars.conf".source = ./polybar/bars.conf;
+      ".config/polybar/start.sh" = {
+        source = ./polybar/start.sh;
         executable = true;
       };
     };

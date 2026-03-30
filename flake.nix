@@ -53,6 +53,7 @@
         ./modules/secrets
         ./modules/ssh
         ./modules/syncthing.nix
+        ./modules/shell
         ./modules/zsh
       ] ++ pkgs.lib.optional (builtins.pathExists localModulePath) localModulePath;
 

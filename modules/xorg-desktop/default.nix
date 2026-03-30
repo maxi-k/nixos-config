@@ -28,14 +28,14 @@ in
     jq
     redshift
     xwininfo
-    xorg.xrandr
-    xorg.xrdb
-    xorg.xinput
-    xorg.xset
-    xorg.xsetroot
-    xorg.xkill
-    xorg.xprop
-    xorg.xdpyinfo
+    xrandr
+    xrdb
+    xinput
+    xset
+    xsetroot
+    xkill
+    xprop
+    xdpyinfo
     unclutter
     pywal
     dunst

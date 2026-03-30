@@ -1,6 +1,11 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./launcher
+    ./terminal
+  ];
+
   services.printing.enable = true;
 
   services.displayManager.ly.enable = true;
@@ -20,7 +25,6 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    alacritty
     networkmanager
     blueman bluez
     brightnessctl
