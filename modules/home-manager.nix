@@ -15,16 +15,16 @@
 
       _module.args = {
         addHomeFile = path: value: {
-          "${config.home.homeDirectory}/${path}" = value;
+          "${path}" = value;
         };
         addHomeConfig = path: value: {
-          "${config.xdg.configHome}/${path}" = value;
+          ".config/${path}" = value;
         };
         addHomeBinary = name: value: {
-          "${config.home.homeDirectory}/.local/bin/${name}" = value;
+          ".local/bin/${name}" = value;
         };
         addHomeData = path: value: {
-          "${config.xdg.dataHome}/${path}" = value;
+          ".local/share/${path}" = value;
         };
       };
     })
