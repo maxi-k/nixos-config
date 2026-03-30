@@ -55,6 +55,9 @@
         ./modules/syncthing.nix
         ./modules/shell
         ./modules/zsh
+        ./modules/launcher
+        ./modules/terminal
+        ./modules/eca
       ] ++ pkgs.lib.optional (builtins.pathExists localModulePath) localModulePath;
 
       hostModules = {
