@@ -6,6 +6,12 @@ in
 {
   environment.systemPackages = [ pkgs.curl ];
 
+  systemd.tmpfiles.rules = [
+    "d ${user.homedir}/.config/eca 0700 ${user.name} users -"
+    "d ${user.homedir}/.config/eca/commands 0700 ${user.name} users -"
+    "d ${user.homedir}/.config/eca/behaviors 0700 ${user.name} users -"
+  ];
+
   repo.secrets.files = lib.optionalAttrs (builtins.pathExists braveApiKeySecret) {
     eca-brave-api-key = {
       file = braveApiKeySecret;
