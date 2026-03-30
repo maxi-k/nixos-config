@@ -34,4 +34,14 @@ live-usb:
 	nix build .#nixosConfigurations.live-usb.config.system.build.isoImage --impure
 .PHONY: live-usb
 
+secrets-new-identity:
+	mkdir -p ${HOME}/.config/agenix
+	nix shell nixpkgs#age -c age-keygen -o ${HOME}/.config/agenix/keys.txt
+.PHONY: secrets-new-identity
+
+secrets-rekey:
+	agenix -r -i ${HOME}/.config/agenix/keys.txt    
+.PHONY: secrets-rekey
+
+
 # end

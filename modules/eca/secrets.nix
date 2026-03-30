@@ -1,6 +1,6 @@
 let
-  recipients = import ../secrets/recipients.nix;
+  rcv = import ../secrets/recipients.nix;
 in
 {
-  "modules/eca/brave-api-key.age".publicKeys = [ recipients.maxiAdmin ];
+  "modules/eca/brave-api-key.age".publicKeys = rcv.all;
 }

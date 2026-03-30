@@ -1,6 +1,6 @@
 let
-  recipients = import ../secrets/recipients.nix;
+  rcv = import ../secrets/recipients.nix;
 in
 {
-  "modules/ssh/ssh-config.shared.age".publicKeys = [ recipients.maxiAdmin ];
+  "modules/ssh/ssh-config.shared.age".publicKeys = rcv.all;
 }
