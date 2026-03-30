@@ -2,13 +2,11 @@
 
 let
   hostDir = builtins.toString hostPath;
-  sharedSshConfigSecret = ./ssh-config.shared.age;
+  sharedSshConfigSecret = ./secrets/ssh-config.shared.age;
   hostSshConfigSecret = hostDir + "/secrets/ssh-config.local.age";
-  githubKeySecret = hostDir + "/secrets/github-id-ed25519.age";
 
   hasSharedSshConfig = builtins.pathExists sharedSshConfigSecret;
   hasHostSshConfig = builtins.pathExists hostSshConfigSecret;
-  hasGithubKey = builtins.pathExists githubKeySecret;
 
   sshConfigIncludes = lib.concatStrings (
     lib.optional hasSharedSshConfig "Include ~/.ssh/config.shared\n"
@@ -38,20 +36,23 @@ in
         group = "users";
         mode = "0600";
       };
-    }
-    // lib.optionalAttrs hasGithubKey {
-      github-ssh-key = {
-        file = githubKeySecret;
-        path = "${user.homedir}/.ssh/id_ed25519";
+    } // {
+      github-key-private = {
+        file = ./secrets/github.age;
+        path = "${user.homedir}/.ssh/github";
         owner = user.name;
         group = "users";
         mode = "0600";
       };
-    };
+    }
+  ;
 
   hm = { addHomeFile, ... }: {
     home.file = addHomeFile ".ssh/config" {
       text = if sshConfigIncludes != "" then sshConfigIncludes else "# Managed by Home Manager\n";
+      force = true;
+    } // addHomeFile ".ssh/github.pub" {
+      text = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINQgz6q77myMHCEvE1gYeBRTApbdhtbHe392LLwOCjn4 maxi-k@github";
       force = true;
     };
   };
