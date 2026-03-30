@@ -23,4 +23,9 @@
     source = ./doom-install;
     executable = true;
   };
+
+  hm.home.file.".local/bin/emacs-scratchpad" = {
+    source = ./emacs-scratchpad;
+    executable = true;
+  };
 }

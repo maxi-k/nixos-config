@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+usage() {
+  echo "$0 [off|mirror|same-as|above|right-of|...] [output=HDMI-A-0]"
+}
+
+test -z "$1" && usage && exit 1
+
+position="$1"
+secondary=${2:-"HDMI-1"}
+if [ "$position" = "mirror" ]; then
+   position="same-as"
+fi
+
+primary=`xrandr | grep primary | awk '{ print $1 }'`
+echo gotten primary "$primary"
+
+xrandr -d :0 --output "$secondary" --auto
+
+sleep 2
+command -v bspc >/dev/null && bspc wm -r
+
+xrandr --output "$secondary" --$position "$primary"
+
+sleep 1
+command -v bspc >/dev/null && bspc wm -r

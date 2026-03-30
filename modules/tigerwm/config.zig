@@ -288,7 +288,7 @@ pub const buttons: []const ButtonBinding = &.{
 // ── Commands ───────────────────────────────────────────────────────────
 
 pub const term_bin = "/run/current-system/sw/bin/alacritty";
-pub const launcher_bin =  "/home/maxi/.dotfiles/bin/launcher";
+pub const launcher_bin =  "launcher";
 
 pub const scratchpad_tag: u32 = 1 << 20;
 pub const term_cmd = [_][*:0]const u8{term_bin};

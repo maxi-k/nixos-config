@@ -42,6 +42,8 @@ in
     libnotify
     pavucontrol
     sxiv
+    devour
+    xsecurelock
     mktheme
     startThemedApps
   ];
@@ -53,6 +55,38 @@ in
     };
     home.file.".config/wal/postrun" = {
       source = ./wal/postrun;
+      executable = true;
+    };
+    home.file.".local/bin/x-mac-layout" = {
+      source = ./bin/x-mac-layout;
+      executable = true;
+    };
+    home.file.".local/bin/x-cycle-layout" = {
+      source = ./bin/x-cycle-layout;
+      executable = true;
+    };
+    home.file.".local/bin/x-caps-is-escape" = {
+      source = ./bin/x-caps-is-escape;
+      executable = true;
+    };
+    home.file.".local/bin/x-switch-layout" = {
+      source = ./bin/x-switch-layout;
+      executable = true;
+    };
+    home.file.".local/bin/day-mode" = {
+      source = ./bin/day-mode;
+      executable = true;
+    };
+    home.file.".local/bin/night-mode" = {
+      source = ./bin/night-mode;
+      executable = true;
+    };
+    home.file.".local/bin/dopen" = {
+      source = ./bin/dopen;
+      executable = true;
+    };
+    home.file.".local/bin/lock" = {
+      source = ./bin/lock;
       executable = true;
     };
   };

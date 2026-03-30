@@ -14,5 +14,9 @@
       source = ./selector;
       executable = true;
     };
+    ".local/bin/run-flatpak" = {
+      source = ./run-flatpak;
+      executable = true;
+    };
   };
 }

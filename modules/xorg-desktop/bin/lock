@@ -1,0 +1,3 @@
+#!/bin/bash
+x-switch-layout us
+xsecurelock

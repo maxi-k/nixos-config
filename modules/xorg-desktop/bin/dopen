@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+command -v "open" >/dev/null && \
+  cmd="open" || \
+  command -v "xdg-open" >/dev/null && cmd="xdg-open" || (echo "no open command found"; exit 1)
+
+echo "running $cmd with args $@"
+command -v devour >/dev/null && \
+  devour $cmd "$@" || \
+  $cmd "$@"

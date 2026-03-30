@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+set -e
+
+test -z "$TEMPDIR" || mkdir -p "$TEMPDIR"
+dir=$(mktemp -d)
+echo "$dir"
+mkdir -p "$dir"
+
+base=${HOME}/dev/build/FlameGraph
+perf script > "$dir/out.perf"
+$base/stackcollapse-perf.pl "$dir/out.perf" > "$dir/out.folded"
+$base/flamegraph.pl "$dir/out.folded" > perf.svg
+
+rm -r "$dir"

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+SXHKDF="${HOME}/.config/sxhkd/sxhkdrc"
+command -v sxhkd >/dev/null && (pgrep sxhkd >/dev/null || (test -f "$SXHKDF" && sxhkd -c "$SXHKDF" || sxhkd))

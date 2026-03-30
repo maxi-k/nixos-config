@@ -57,6 +57,7 @@
         ./modules/zsh
         ./modules/launcher
         ./modules/terminal
+        ./modules/webapps
         ./modules/eca
       ] ++ pkgs.lib.optional (builtins.pathExists localModulePath) localModulePath;
 

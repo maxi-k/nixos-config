@@ -2,7 +2,8 @@
 
 {
   imports = [
-    ./emacs.nix
+    ./emacs
+    ./perf-utils
   ];
 
   environment.systemPackages = with pkgs; [
@@ -16,7 +17,6 @@
     cmake glib gnumake
     killall
     # performace
-    perf hotspot
     htop iotop powertop
     lm_sensors
     # nice-to-have global languages

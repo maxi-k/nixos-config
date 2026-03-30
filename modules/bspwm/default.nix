@@ -12,9 +12,7 @@
     bspwm
     sxhkd
     bsp-layout
-    devour
     (polybar.override { pulseSupport = true; })
-    xsecurelock
     eww
     ripgrep
     tabbed
@@ -41,6 +39,26 @@
       };
       ".local/bin/bspwm-scratch-program" = {
         source = ./bin/bspwm-scratch-program;
+        executable = true;
+      };
+      ".local/bin/start-keybindings" = {
+        source = ./bin/start-keybindings;
+        executable = true;
+      };
+      ".local/bin/list-keybindings" = {
+        source = ./bin/list-keybindings;
+        executable = true;
+      };
+      ".local/bin/external-monitor" = {
+        source = ./bin/external-monitor;
+        executable = true;
+      };
+      ".local/bin/tabc.sh" = {
+        source = ./bin/tabc.sh;
+        executable = true;
+      };
+      ".local/bin/powermenu-gui" = {
+        source = ./bin/powermenu-gui;
         executable = true;
       };
       ".config/polybar/config.ini".source = ./polybar/config.ini;

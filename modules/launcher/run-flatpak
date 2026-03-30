@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+GTK_THEME=$(gsettings get org.gnome.desktop.interface gtk-theme | sed "s/'//g")
+flatpak list --columns=application | head -n -1 | selector | GTK_THEME=$GTK_THEME xargs flatpak run
