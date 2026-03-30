@@ -8,7 +8,7 @@
 
   environment.systemPackages = with pkgs; [
     # dev tools & editors
-    git git-lfs jj 
+    git git-lfs jujutsu 
     vim 
     zsh bash tmux
     curl wget

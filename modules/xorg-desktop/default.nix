@@ -89,6 +89,10 @@ in
       // addHomeBinary "lock" {
         source = ./bin/lock;
         executable = true;
+      }
+      // addHomeConfig "sxiv/exec/key-handler" {
+        source = ./sxiv/key-handler;
+        executable = true;
       };
   };
 }
