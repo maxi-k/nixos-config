@@ -1,15 +1,14 @@
-{ config, lib, pkgs, inputs, user, ... }:
+{ config, lib, user, hostPath, ... }:
 
 let
-  repoRoot = builtins.toString ../.;
-  hostSecretsDir = "${repoRoot}/secrets/hosts/${config.networking.hostName}";
-  sharedSecretsDir = "${repoRoot}/secrets/shared";
-  sharedSshConfigSecret = "${sharedSecretsDir}/ssh-config.age";
-  hostSshConfigSecret = "${hostSecretsDir}/ssh-config.local.age";
-  githubKeySecret = "${hostSecretsDir}/github-id-ed25519.age";
+  hostDir = builtins.toString hostPath;
+  sharedSshConfigSecret = ./ssh-config.shared.age;
+  hostSshConfigSecret = hostDir + "/secrets/ssh-config.local.age";
+  githubKeySecret = hostDir + "/secrets/github-id-ed25519.age";
 
   hasSharedSshConfig = builtins.pathExists sharedSshConfigSecret;
   hasHostSshConfig = builtins.pathExists hostSshConfigSecret;
+  hasGithubKey = builtins.pathExists githubKeySecret;
 
   sshConfigIncludes = lib.concatStrings (
     lib.optional hasSharedSshConfig "Include ~/.ssh/config.shared\n"
@@ -17,29 +16,18 @@ let
   );
 in
 {
-  imports = [
-    inputs.agenix.nixosModules.default
-  ];
-
-  environment.systemPackages = [
-    inputs.agenix.packages.${pkgs.system}.default
-  ];
-
-  age.identityPaths = [
-    "${user.homedir}/.config/agenix/keys.txt"
-  ];
-
   systemd.tmpfiles.rules = [
     "d ${user.homedir}/.ssh 0700 ${user.name} users -"
   ];
 
-  age.secrets =
+  repo.secrets.files =
     lib.optionalAttrs hasSharedSshConfig {
       ssh-config-shared = {
         file = sharedSshConfigSecret;
         path = "${user.homedir}/.ssh/config.shared";
         owner = user.name;
-        mode = "600";
+        group = "users";
+        mode = "0600";
       };
     }
     // lib.optionalAttrs hasHostSshConfig {
@@ -47,15 +35,17 @@ in
         file = hostSshConfigSecret;
         path = "${user.homedir}/.ssh/config.local";
         owner = user.name;
-        mode = "600";
+        group = "users";
+        mode = "0600";
       };
     }
-    // lib.optionalAttrs (builtins.pathExists githubKeySecret) {
+    // lib.optionalAttrs hasGithubKey {
       github-ssh-key = {
         file = githubKeySecret;
         path = "${user.homedir}/.ssh/id_ed25519";
         owner = user.name;
-        mode = "600";
+        group = "users";
+        mode = "0600";
       };
     };
 

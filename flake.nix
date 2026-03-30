@@ -50,7 +50,8 @@
         ./system.nix
         ./user.nix
         ./modules/home-manager.nix
-        ./modules/agenix.nix
+        ./modules/secrets
+        ./modules/ssh
       ] ++ pkgs.lib.optional (builtins.pathExists localModulePath) localModulePath;
 
       hostModules = {
@@ -62,7 +63,11 @@
       buildHost = name:
         nixpkgs.lib.nixosSystem {
           inherit pkgs;
-          specialArgs = { inherit inputs; inherit system; inherit user; };
+          specialArgs = {
+            inherit inputs system user;
+            hostName = name;
+            hostPath = hostModules.${name};
+          };
           modules = sharedModules ++ [hostModules.${name}];
         };
 
