@@ -2,12 +2,26 @@
 
 let
   cfg = config.repo.terminal;
+  settingsFormat = pkgs.formats.toml { };
+  alacrittySettings = lib.recursiveUpdate
+    (builtins.fromTOML (builtins.readFile ./alacritty/alacritty.toml))
+    {
+      font.size = cfg.fontSize;
+    };
 in
 {
-  options.repo.terminal.defaultTheme = lib.mkOption {
-    type = lib.types.str;
-    default = "catppuccin-frappe";
-    description = "Default Alacritty theme name to copy into active-theme.toml.";
+  options.repo.terminal = {
+    defaultTheme = lib.mkOption {
+      type = lib.types.str;
+      default = "catppuccin-frappe";
+      description = "Default Alacritty theme name to copy into active-theme.toml.";
+    };
+
+    fontSize = lib.mkOption {
+      type = lib.types.float;
+      default = 18.0;
+      description = "Alacritty font size.";
+    };
   };
 
   config = {
@@ -18,7 +32,7 @@ in
     hm = { lib, addHomeBinary, addHomeConfig, config, ... }: {
     home.file = {}
       // addHomeConfig "alacritty/alacritty.toml" {
-        source = ./alacritty/alacritty.toml;
+        source = settingsFormat.generate "alacritty.toml" alacrittySettings;
       }
       // addHomeConfig "alacritty/alacritty.keys.toml" {
         source = ./alacritty/alacritty.keys.toml;
