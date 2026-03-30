@@ -14,12 +14,6 @@
     initialPassword = "test"; 
   };
 
-  # Syncing setup
-  services.syncthing = {
-   enable = true; 
-   user = user.name;
-   dataDir = user.homedir;
-  };
   hm = { pkgs, ... }: {
     home.packages = with pkgs; [
       cryptomator

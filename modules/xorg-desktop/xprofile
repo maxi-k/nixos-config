@@ -1,0 +1,22 @@
+#!/bin/sh
+export DOTFILES_XPROFILE_LOADED="true"
+
+[ -f "${HOME}/.config/shell/profile" ] && [ -z "$DOTFILES_PROFILE_LOADED" ] && . "${HOME}/.config/shell/profile"
+
+[ -e "${HOME}/.config/X/default-config" ] && xrdb "${HOME}/.config/X/default-config"
+[ -e "${HOME}/.config/X/constant-config" ] && xrdb -merge "${HOME}/.config/X/constant-config"
+
+[ -f "${HOME}/.config/screenlayout" ] && "${HOME}/.config/screenlayout"
+
+command -v mktheme >/dev/null && mktheme &
+command -v picom >/dev/null && (pgrep picom >/dev/null || picom) &
+command -v unclutter >/dev/null && (pgrep unclutter >/dev/null || unclutter) &
+command -v nm-applet >/dev/null && (pgrep nm-applet >/dev/null || nm-applet) &
+command -v start-themed-apps >/dev/null && start-themed-apps &
+
+command -v gsettings >/dev/null && export GTK_THEME=$(gsettings get org.gnome.desktop.interface gtk-theme | sed "s/'//g")
+test -d "$HOME/.local/share/flatpak/exports/bin" && export PATH="$PATH:$HOME/.local/share/flatpak/exports/bin"
+
+command -v xinput >/dev/null && xinput --set-prop "pointer:Logitech MX Master 3" 'libinput Accel Speed' -0.5 &
+command -v xset >/dev/null && xset mouse 3 6 &
+

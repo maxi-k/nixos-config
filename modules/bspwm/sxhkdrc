@@ -1,0 +1,159 @@
+# ------
+# Launchers & Terminals 
+# ------
+
+super + shift + Return
+  $TERMINAL
+ 
+#@space
+super + p 
+      launcher
+
+#@space
+super + shift + p 
+      COMBINED_MODI=drun,run launcher -show-icons
+
+super + ctrl + p
+  run-flatpak
+
+# Open special programs
+super + shift + b
+    $TERMINAL -e "bluetoothctl"
+
+super + shift + c
+    $TERMINAL -e "python3"
+
+super + shift + e
+    libreoffice --calc
+
+super + shift + o
+    select-recent-dir "emacsclient -c"
+
+super + ctrl + s
+    tmux list-sessions | selector | awk -F: '\{ print $1 \}' | xargs $TERMINAL -e tmux new-session -A -s
+
+super + shift + d
+    xdg-open ~
+
+super + shift + f
+    cat ~/.cache/searches.log | selector | tee -a ~/.cache/searches.log | xargs -I'%s' firefox --search "%s"
+
+super + shift + v
+    awk '/^\ +[a-zA-Z]/ && last {print substr($0,0,50),"\t",last}  {last=""} /^[a-zA-Z]/{last=$0}' ~/.config/sxhkd/sxhkdrc | sed -E 's/^\s+/\t/' | column -t -s $'\t' | selector
+
+# Choose bspwm layout
+super + {shift,ctrl} + space
+    bspwm-choose-layout {apply,once}
+
+# Cycle keyboard layout
+super + space
+    x-cycle-layout && command -v notify-send && notify-send "Cycled Layout"
+
+# Lock the screen
+super + shift + u
+    (lock & (xset dpms force off && systemctl suspend))
+
+XF86AudioMute
+    amixer sset Master toggle
+
+XF86Audio{Raise,Lower}Volume
+    amixer sset Master 5%{+,-}
+
+XF86MonBrightness{Up,Down}
+  brightnessctl s 10{+,-}
+
+XF86Audio{Play,Pause,Stop,Prev,Next}
+    command -v playerctl && playerctl {play,pause,stop,previous,next} || notify-send "please install playerctl"
+
+super + Delete
+  pkill -USR1 -x sxhkd && command -v notify-send && notify-send "Reloaded keybindings"
+
+super + shift + r
+  pkill -USR1 -x sxhkd && bspc wm -r && command -v notify-send && notify-send "Reloaded wm and hotkeys"
+
+super + shift + Delete
+  bspc quit
+  
+super + {_, shift +} q
+  bspc node -{c, k}
+
+super + m
+  bspc desktop -l next
+
+super + o
+	bspc node -R 90
+
+super + shift + o
+	bspc node @focused:/ -R 90
+
+super + Return
+	bspc node -s biggest.local
+  
+super + {y,shift + y,g,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+super + shift + s
+    echo -e "marked\nlocked\nsticky\nprivate" | selector | xargs bspc node -g
+
+super + shift + period
+        bspwm-scratch-program emacs-scratchpad
+
+super + shift + a
+      	bspwm-scratch-program chatgpt-scratchpad "" $(bspwm-get-proportionate-rectangle 60 60)
+
+super + shift + m
+      	bspwm-scratch-program "webapp chat.mistral.ai" "" $(bspwm-get-proportionate-rectangle 60 60)
+
+super + shift + g
+      	bspwm-scratch-program "webapp google.com" "" $(bspwm-get-proportionate-rectangle 60 60)
+
+super + ctrl + period
+        bspwm-scratch-program
+
+super + ctrl + comma
+        bspc node -g hidden=on
+
+super + {_,shift +,ctrl +}{h,j,k,l}
+	bspc node -{f,s,n} {west,south,north,east}
+
+super + {v,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+super + {apostrophe, backslash}
+        bspc node --to-monitor {prev, next}
+
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '{1-9,10}'
+
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+super + t; {h,j,k,l}
+    tabc.sh add $(bspc query -N -n {west,south,north,east}) $(bspc query -N -n focused)
+
+super + t; r
+    tabbed=$(bspc query -N -n focused); \
+    child=$(tabc.sh list $tabbed | head -n1); \
+    notify-send "tabbed $tabbed child $child"; \
+    tabc.sh remove $tabbed $child
+
+super + t; q
+      notify-send $(bspc query -T -n focused)
+
+super + t; w
+    tabc.sh wrap $(bspc query -N -n focused)
+
+super + t; s
+      tabbed

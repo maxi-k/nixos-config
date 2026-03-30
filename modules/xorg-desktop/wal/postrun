@@ -1,0 +1,24 @@
+#!/bin/sh
+
+confdir=${XDG_CONFIG_HOME:-$HOME/.config}
+cachedir=${XDG_CACHE_HOME:-$HOME/.cache}
+
+. "$cachedir/wal/colors.sh"
+
+xrdb -override "$cachedir/wal/colors.Xresources"
+[ -e "$confdir/X/constant-config" ] && xrdb -override "$confdir/X/constant-config"
+
+pkill dunst || true
+[ -f "$cachedir/wal/dunstrc" ] && (dunst -conf "$cachedir/wal/dunstrc" &) || (dunst &)
+
+if command -v dwmc >/dev/null; then
+  COL_LIST="$foreground$background$color8$foreground$color10$foreground"
+  echo "c$COL_LIST" | dwmc | xargs notify-send "Changing dwm colors: "
+fi
+
+[ -f "$cachedir/wal/colors-rofi-dark.rasi" ] && cat <<'EOF' >> "$cachedir/wal/colors-rofi-dark.rasi"
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+}
+EOF

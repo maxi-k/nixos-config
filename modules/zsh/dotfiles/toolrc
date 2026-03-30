@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+test -f /etc/zsh_command_not_found && source /etc/zsh_command_not_found
+command -v direnv 1>/dev/null && eval "$(direnv hook zsh)"
+alias dx="devour xournalpp"

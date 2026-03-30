@@ -4,7 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/desktop.nix
-    ../../modules/bspwm.nix
+    ../../modules/bspwm
     ../../modules/development.nix
     ../../modules/laptop.nix
     ../../modules/tigerwm

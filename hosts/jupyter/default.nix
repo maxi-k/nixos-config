@@ -3,9 +3,10 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/desktop.nix
     ../../modules/tigerwm
     ../../modules/lispwm.nix
-    ../../modules/bspwm.nix
+    ../../modules/bspwm
     ../../modules/development.nix
     ../../modules/podman.nix
     ../../modules/virtualization.nix

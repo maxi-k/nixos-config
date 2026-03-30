@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# This script does the following:
+#   Run by itself, set the wallpaper (at X start).
+#   If given a file, set that as the new wallpaper.
+#   If given a directory, choose random file in it.
+#   If wal is installed, also generate a colorscheme.
+
+confdir=${XDG_CONFIG_HOME:-$HOME/.config}
+bgloc="${XDG_CACHE_HOME:-$HOME/.cache}/bg"
+logfile="/tmp/mktheme.log"
+
+log() {
+   echo "[$(date)] $1" >> "$logfile"
+}
+
+[ -f "$1" ] && ln -sf "$(readlink -f "$1")" "$bgloc" || true
+
+[ -d "$1" ] \
+  && ln -sf "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$bgloc" \
+  && log "Random Wallpaper chosen: $bgloc"
+
+[[ -z "$NO_DYNAMIC_COLORS" ]] \
+  && command -v wal >/dev/null \
+  && wal -s -n -i "$(readlink -f "$bgloc")" -o "$confdir/wal/postrun" &
+
+feh --bg-fill "$bgloc" --no-fehbg

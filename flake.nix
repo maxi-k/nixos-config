@@ -52,6 +52,8 @@
         ./modules/home-manager.nix
         ./modules/secrets
         ./modules/ssh
+        ./modules/syncthing.nix
+        ./modules/zsh
       ] ++ pkgs.lib.optional (builtins.pathExists localModulePath) localModulePath;
 
       hostModules = {
