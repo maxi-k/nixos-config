@@ -4,6 +4,8 @@
   imports = [
     ./launcher
     ./terminal
+    ./webapps
+    ./eca
   ];
 
   services.printing.enable = true;

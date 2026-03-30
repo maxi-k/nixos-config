@@ -55,15 +55,12 @@
         ./modules/syncthing.nix
         ./modules/shell
         ./modules/zsh
-        ./modules/launcher
-        ./modules/terminal
-        ./modules/webapps
-        ./modules/eca
       ] ++ pkgs.lib.optional (builtins.pathExists localModulePath) localModulePath;
 
       hostModules = {
         jupyter = ./hosts/jupyter;
         thinkpad-maxi = ./hosts/thinkpad;
+        luna = ./hosts/luna;
         live-usb = ./hosts/live-usb.nix;
       };
 
