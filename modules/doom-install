@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+emacs_dir="${HOME}/.emacs.d"
+doom_config_dir="${HOME}/.config/doom"
+
+git_clone_if_missing() {
+  local repo="$1"
+  local target="$2"
+
+  if [ -e "$target" ]; then
+    echo "Skipping $repo: $target already exists"
+    return 0
+  fi
+
+  mkdir -p "$(dirname "$target")"
+  git clone "$repo" "$target"
+}
+
+git_clone_if_missing https://github.com/doomemacs/doomemacs "$emacs_dir"
+git_clone_if_missing https://github.com/maxi-k/doom-emacs "$doom_config_dir"
+
+echo "Doom Emacs repositories are ready."
+echo "Next steps:"
+echo "  1. ${doom_config_dir}/bin/doom sync   (or ${emacs_dir}/bin/doom sync depending on repo layout)"
+echo "  2. Start Emacs"
