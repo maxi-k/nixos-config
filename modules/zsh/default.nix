@@ -1,10 +1,10 @@
 { pkgs, ... }:
 
 {
-  hm = {
+  hm = { config, ... }: {
     programs.zsh = {
       enable = true;
-      dotDir = ".config/zsh";
+      dotDir = "${config.xdg.configHome}/zsh";
     };
 
     programs.zoxide = {

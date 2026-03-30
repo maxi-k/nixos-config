@@ -15,7 +15,7 @@
     graphviz
     shellcheck
     nil
-    nixfmt-rfc-style
+    nixfmt
     git
   ];
 

@@ -21,8 +21,10 @@
 
     home.activation.ensureAlacrittyTheme = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       mkdir -p "$HOME/.config/alacritty"
-      if [ ! -e "$HOME/.config/alacritty/active-theme.toml" ]; then
-        cp "${./alacritty/themes/catppuccin-frappe.toml}" "$HOME/.config/alacritty/active-theme.toml"
+      if [ ! -e "$HOME/.config/alacritty/active-theme.toml" ] || [ -L "$HOME/.config/alacritty/active-theme.toml" ]; then
+        install -m 0644 "${./alacritty/themes/catppuccin-frappe.toml}" "$HOME/.config/alacritty/active-theme.toml"
+      else
+        chmod u+w "$HOME/.config/alacritty/active-theme.toml" || true
       fi
     '';
   };

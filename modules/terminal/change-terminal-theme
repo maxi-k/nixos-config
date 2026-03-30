@@ -1,8 +1,9 @@
 #!/bin/sh
+set -eu
 
 confdir="${XDG_CONFIG_HOME:-$HOME/.config}/alacritty"
 themedir="$confdir/themes"
 theme=`ls "$themedir" | cut -d'.' -f1 | selector -p "terminal theme"`
 test -z "$theme" && notify-send "No theme selected" "Doing nothing" && exit 0
-cp "$themedir/$theme.toml" "$confdir/active-theme.toml"
-touch "$confdir/alacritty.toml"
+mkdir -p "$confdir"
+install -m 0644 "$themedir/$theme.toml" "$confdir/active-theme.toml"

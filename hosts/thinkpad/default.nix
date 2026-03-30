@@ -50,7 +50,7 @@
   ];
   # users.users.maxi.extraGroups = ["adbusers" "plugdev"];
 
-  services.xserver.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = true;
   
   boot.kernelModules = [ "v4l2loopback" "usbhdi" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [

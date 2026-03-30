@@ -47,8 +47,6 @@
           name = "Maximilian Kuschewski";
           email = "maxi.kuschewski@gmail.com";
         };
-      };
-      extraConfig = {
         core.editor = "vim";
         credential.helper = "cache";
         init.defaultBranch = "master";
