@@ -5,6 +5,7 @@
     programs.zsh = {
       enable = true;
       dotDir = "${config.xdg.configHome}/zsh";
+      initExtra = builtins.readFile ./dotfiles/.zshrc;
     };
 
     programs.zoxide = {
@@ -16,9 +17,6 @@
     home.file = {}
       // addHomeFile ".zprofile" {
         source = ./dotfiles/.zprofile;
-      }
-      // addHomeConfig "zsh/.zshrc" {
-        source = ./dotfiles/.zshrc;
       }
       // addHomeConfig "zsh/lookrc" {
         source = ./dotfiles/lookrc;
