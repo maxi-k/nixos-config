@@ -2,6 +2,10 @@
 
 let
   cfg = config.repo.secrets;
+  secretParentDirs =
+    lib.unique
+      (lib.mapAttrsToList (_: secret: builtins.dirOf secret.path)
+        (lib.filterAttrs (_: secret: lib.hasPrefix "${user.homedir}/" secret.path) cfg.files));
 in
 {
   imports = [
@@ -57,6 +61,10 @@ in
     environment.systemPackages = [
       inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
+
+    systemd.tmpfiles.rules = map
+      (dir: "d ${dir} 0700 ${user.name} users -")
+      secretParentDirs;
 
     age.identityPaths = cfg.identityPaths;
     age.secrets = cfg.files;
