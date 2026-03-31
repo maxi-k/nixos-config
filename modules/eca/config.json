@@ -21,7 +21,7 @@
       }
     },
     "web_fetch": {
-      "description": "Fetches the full contents of a web page (HTML/text) given a URL. Optionally fetch only a byte range.",
+      "description": "Fetches the full contents of a web page (HTML/text) given a URL. Optionally fetch only a byte range. If the response indidcates that the request has been blocked (403 or similar), do not retry.",
       "command": "bash -lc 'set -euo pipefail; url=\"{{url}}\"; range=\"{{range}}\"; if [ -n \"$range\" ]; then curl -sS --fail-with-body --compressed -L -H \"Range: bytes=$range\" \"$url\"; else curl -sS --fail-with-body --compressed -L \"$url\"; fi'",
       "schema": {
         "properties": {
