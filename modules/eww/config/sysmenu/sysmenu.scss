@@ -1,0 +1,104 @@
+.sysmenu-window {
+    font-family: $basefont;
+    border: 2px solid $color2;
+}
+
+.sysmenu {
+    background-color: $background-darker;
+    min-width: 18rem;
+    padding: .8rem 2rem;
+}
+
+@mixin smbox {
+    background-color: $background;
+    padding: .8rem;
+}
+
+.aside {
+    @include smbox;
+}
+
+.hr {
+    border-top: 1px solid $color2;
+}
+
+.motto {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: $color9;
+}
+
+.timebox {
+    margin: 0 2.5rem;
+
+    &, & > * {
+        background: none;
+    }
+
+    .time-container {
+        .content {
+            font-weight: bold;
+            font-size: 3.6rem;
+        }
+    }
+
+    .date-container {
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin: 3px 0;
+    }
+}
+
+.usercard {
+    padding: 1.5rem 0 1.5rem 0;
+}
+
+.face {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 5rem;
+    min-width: 5rem;
+    border-radius: 100%;
+}
+
+.weather {
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+
+.icon-btn .icon {
+    color: $color7;
+    font-family: $fontawesome;
+    font-size: 1.7rem;
+    padding: .5rem 1rem .5rem 0;
+}
+
+.icon-btn:hover {
+    color: $color5;
+    font-family: $fontawesome;
+}
+
+.system {
+
+}
+
+.progress {
+    circular-progress {
+        background-color: #000;
+
+        &:nth-child(even) {
+            color: $color5;
+        }
+
+        &:nth-child(odd) {
+            color: $color6;
+        }
+    }
+
+    .icon {
+        font-family: $fontawesome;
+        font-size: 1.4rem;
+        padding: 1.1rem;
+    }
+}

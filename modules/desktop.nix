@@ -4,6 +4,7 @@
   imports = [
     ./launcher
     ./terminal
+    ./eww
     ./webapps
     ./eca
   ];
