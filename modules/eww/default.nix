@@ -6,7 +6,7 @@ in
 {
   options.repo.eww.enable = lib.mkOption {
     type = lib.types.bool;
-    default = true;
+    default = false;
     description = "Whether to install and configure eww.";
   };
 
@@ -20,11 +20,28 @@ in
       pavucontrol
     ];
 
-    hm = { addHomeConfig, ... }: {
-      home.file = addHomeConfig "eww" {
-        source = ./config;
-        recursive = true;
-      };
+    hm = { addHomeBinary, addHomeConfig, ... }: {
+      home.file = {}
+        // addHomeConfig "eww" {
+          source = ./config;
+          recursive = true;
+        }
+        // addHomeBinary "eww-sysmenu" {
+          text = ''
+            #!/usr/bin/env sh
+
+            window_name=''${1:-"sysmenu-bottom-left"}
+
+            pgrep eww || eww daemon
+
+            if pgrep picom > /dev/null; then
+              eww open-many --toggle "$window_name-closer" "$window_name"
+            else
+              eww open --toggle "$window_name"
+            fi
+          '';
+          executable = true;
+        };
     };
   };
 }

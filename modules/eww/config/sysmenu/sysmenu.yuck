@@ -5,11 +5,6 @@
 
 (defpoll completeday :interval "1s" "date '+%A, %d %B'")
 
-(defvar IMAGEP "assets/profile.png")
-
-(defvar closecmd
-  "eww close sysmenu-bottom-left && eww close sysmenu-bottom-left-closer")
-
 (defpoll username :interval "24h" "whoami")
 (defpoll hostname :interval "24h" "cat /etc/hostname")
 (defpoll uptime :interval "30s" "uptime | grep -Eo 'up.*[0-9]+:[0-9]+' | awk '{ print $2 }'")
@@ -74,7 +69,7 @@
   (box :space-evenly "false"
        :orientation "v"
        :class "usercard"
-       (box :style "background-image: url('${IMAGEP}');"
+       (box :style "background-image: url('assets/profile.png');"
             :class "face"
             :valign "center"
             :halign "center")))
@@ -85,7 +80,7 @@
 
 (defwidget sys-indicator [data icon css tip]
   (eventbox :cursor "pointer"
-            :onclick "( ${closecmd} ); ( $TERMINAL -e 'htop' & )"
+            :onclick "( eww close sysmenu-bottom-left && eww close sysmenu-bottom-left-closer ); ( $TERMINAL -e 'htop' & )"
             (box :orientation "v"
                  :class "progress"
              (circular-progress
@@ -143,7 +138,7 @@
 (defwidget appbtn [onclick icon title]
   (eventbox :cursor "pointer"
             :class "icon-btn"
-            (button :onclick "( ${closecmd} ); ( ${onclick} )"
+            (button :onclick "( eww close sysmenu-bottom-left && eww close sysmenu-bottom-left-closer ); ( ${onclick} )"
                     :tooltip title
                     (box :orientation "h"
                          :space-evenly "false"
@@ -164,6 +159,7 @@
 ;; Windows ;;
 
 (defwindow sysmenu-bottom-left
+  :monitor 0
   :geometry (geometry :x "0px"
                       :y "-30px"
                       :anchor "bottom left")
@@ -173,6 +169,7 @@
   (sysmenu))
 
 (defwindow sysmenu-bottom-left-closer
+  :monitor 0
   :geometry (geometry :width "100%" :height "100%")
   :stacking "fg"
   :focusable false

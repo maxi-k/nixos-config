@@ -5,6 +5,8 @@
     ../xorg-desktop
   ];
 
+  repo.eww.enable = true;
+
   services.xserver.windowManager.bspwm.enable = true;
   services.displayManager.defaultSession = "none+bspwm";
 
@@ -13,7 +15,6 @@
     sxhkd
     bsp-layout
     (polybar.override { pulseSupport = true; })
-    eww
     ripgrep
     tabbed
   ];
