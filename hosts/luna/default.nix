@@ -15,6 +15,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   repo.terminal.fontSize = 16.0;
+  repo.tigerwm.waybar.position = "top";
 
   networking.hostName = "luna"; # Define your hostname.
 

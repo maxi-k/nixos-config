@@ -1,6 +1,8 @@
 { config, lib, pkgs, inputs, system, user, ... }:
 
 let
+  cfg = config.repo.tigerwm;
+
   tigerwm_pkg = inputs.tigerwm.packages.${system}.default.override {
     configFile = ./config.zig;
     keybindingsFile = ./keybindings.zig;
@@ -27,6 +29,12 @@ let
   });
 in
 {
+  options.repo.tigerwm.waybar.position = lib.mkOption {
+    type = lib.types.enum [ "top" "bottom" "left" "right" ];
+    default = "bottom";
+    description = "Waybar position for the TigerWM session.";
+  };
+
   nixpkgs.overlays = [
     # (final: prev: {
     #   tigerwm = inputs.tigerwm.packages.${system}.default.override {
@@ -104,7 +112,7 @@ in
       settings = {
         mainBar = {
           layer = "top";
-          position = "bottom";
+          position = cfg.waybar.position;
           modules-left = ["dwl/tags"];
           modules-center = ["dwl/window"];
           modules-right = ["sway/language" "pulseaudio" "network" "battery" "clock" "tray" ];
