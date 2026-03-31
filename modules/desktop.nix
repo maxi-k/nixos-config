@@ -47,5 +47,21 @@
     ncdu
     nix-tree
     spotify
+    edid-decode
   ];
+
+  hm = { config, addHomeBinary, ... }: {
+    home.file = addHomeBinary "list-display-serial-numbers" {
+      text = ''
+for file in $(ls -1 /sys/class/drm/*/edid); do
+    text=$(tr -d 0 <"$file")
+    if [ -n "$text" ]; then
+        edid-decode "$file" | grep -e Manufacturer: -e Product
+        sleep 0.0001
+    fi
+done
+'';
+      executable = true;
+    };
+  };
 }

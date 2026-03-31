@@ -24,4 +24,8 @@ log() {
   && command -v wal >/dev/null \
   && wal -s -n -i "$(readlink -f "$bgloc")" -o "$confdir/wal/postrun" &
 
-feh --bg-fill "$bgloc" --no-fehbg
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    awww img --resize crop "$bgloc" 
+else
+    feh --bg-fill "$bgloc" --no-fehbg
+fi

@@ -175,6 +175,39 @@ pub const monitor_rules = [_]MonitorRule{
         .y = 0,
         .tag_priority = 0
     },
+    // countryside office
+    .{
+        .name = null,
+        .make = null,
+        .model = "Acer R270",
+        .serial = "",
+        .description = null,
+        .mfact = 0.55,
+        .nmaster = 1,
+        .scale = 1.0,
+        .layout_idx = 0,
+        .transform = 0,
+        .x = 0,
+        .y = 0,
+        .tag_priority = 0
+    },
+    // framework display
+    .{
+        .name = null,
+        .make = "",
+        .model = "NE135A1M-NY1",
+        .serial = "",
+        .description = null,
+        .mfact = 0.55,
+        .nmaster = 1,
+        .scale = 1.5,
+        .layout_idx = 0,
+        .transform = 0,
+        .x = 0,
+        .y = 0,
+        .tag_priority = 0
+    },
+    // default
     .{
         .name = null,
         .make = null,
