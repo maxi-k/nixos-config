@@ -44,6 +44,22 @@ in
         group = "users";
         mode = "0600";
       };
+    } // {
+      id-rsa-private = {
+        file = ./secrets/id_rsa.age;
+        path = "${user.homedir}/.ssh/id_rsa";
+        owner = user.name;
+        group = "users";
+        mode = "0600";
+      };
+    } // {
+      tum-private = {
+        file = ./secrets/tum.age;
+        path = "${user.homedir}/.ssh/tum";
+        owner = user.name;
+        group = "users";
+        mode = "0600";
+      };
     }
   ;
 
@@ -54,6 +70,13 @@ in
     } // addHomeFile ".ssh/github.pub" {
       text = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINQgz6q77myMHCEvE1gYeBRTApbdhtbHe392LLwOCjn4 maxi-k@github";
       force = true;
+    } // addHomeFile ".ssh/id_rsa.pub" {
+      source = ./id_rsa.pub;
+      force = true;
+    } // addHomeFile ".ssh/tum.pub" {
+      source = ./tum.pub;
+      force = true;
     };
+
   };
 }
