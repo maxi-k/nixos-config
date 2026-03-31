@@ -194,9 +194,9 @@ pub const monitor_rules = [_]MonitorRule{
     // framework display
     .{
         .name = null,
-        .make = "",
+        .make = null,
         .model = "NE135A1M-NY1",
-        .serial = "",
+        .serial = null,
         .description = null,
         .mfact = 0.55,
         .nmaster = 1,
