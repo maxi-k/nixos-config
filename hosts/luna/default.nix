@@ -1,4 +1,4 @@
-{ config, pkgs, ... }@ctx:
+{ config, pkgs, lib, ... }@ctx:
 
 {
   imports = [
@@ -18,6 +18,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   repo.terminal.fontSize = 16.0;
+  repo.desktop.displayManager = "ly";
   repo.tigerwm.waybar.position = "top";
 
   services.desktopManager.gnome.enable = true;
@@ -37,6 +38,36 @@
   # enable firmware update for `fwupdmgr update`
   services.fwupd.enable = true;
 
+  # fingerprint auth
+  services.fprintd.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.sudo.fprintAuth = true;
+  security.pam.services.gnome-keyring.fprintAuth = true;
+  ## based on arch wiki
+  # security.pam.services.ly-fingerprint = lib.mkIf (config.services.fprintd.enable && config.services.displayManager.ly.enable) {
+  #   text = ''
+  # auth		sufficient  	pam_unix.so try_first_pass likeauth nullok
+  # auth		sufficient  	${pkgs.fprintd}/lib/security/pam_fprintd.so
+  # '';
+  # };
+  ## based on nixos wiki
+  # security.pam.services.pam-fingerprint.text = ''
+  #   auth       required                    pam_shells.so
+  #   auth       requisite                   pam_nologin.so
+  #   auth       requisite                   pam_faillock.so      preauth
+  #   auth       required                    ${pkgs.fprintd}/lib/security/pam_fprintd.so
+  #   auth       optional                    pam_permit.so
+  #   auth       required                    pam_env.so
+  #   # auth       [success=ok default=1]      ${pkgs.gdm}/lib/security/pam_gdm.so
+  #   auth       optional                    ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so
+
+  #   account    include                     login
+
+  #   password   required                    pam_deny.so
+
+  #   session    include                     login
+  #   session    optional                    ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start
+  # '';
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
