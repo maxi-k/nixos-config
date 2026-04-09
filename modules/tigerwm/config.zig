@@ -51,6 +51,23 @@ pub const focus_color: Color = hexColor(0x7f7f7fff);
 pub const urgent_color: Color = hexColor(0xff0000ff);
 pub const fullscreen_bg: Color = .{ 0.0, 0.0, 0.0, 1.0 };
 
+pub const NightMode = struct {
+    enabled_by_default: bool,
+    temperature_kelvin: u16,
+    brightness: f32,
+};
+
+/// Warm output gamma adjustment applied compositor-side.
+///
+/// `temperature_kelvin` should stay roughly in the 1000K–10000K range.
+/// `brightness` is a post-temperature multiplier in the 0.1–1.0 range.
+pub const night_mode = NightMode{
+    .enabled_by_default = false,
+    .temperature_kelvin = 4200,
+    .brightness = 0.95,
+};
+
+
 // ── Keyboard ───────────────────────────────────────────────────────────
 
 /// the layout cycling action cycles through these in order
@@ -334,6 +351,7 @@ pub const screenshot_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "grim -g \"$(slurp
 pub const calc_cmd = [_][*:0]const u8{ term_bin, "-e", "numbat" };
 pub const excel_cmd = [_][*:0]const u8{ "bin/sh", "-c", "libreoffice --calc" };
 pub const lock_cmd = [_][*:0]const u8{ "/bin/sh", "-kc", "swaylock -c 000000" };
+pub const selector_palette_cmd = [_][*:0]const u8{"tigerstylewm", "palette", "selector"};
 pub const portal_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots && systemctl --user start xdg-desktop-portal xdg-desktop-portal-wlr" };
 pub const bluetooth_cmd = [_][*:0]const u8{ term_bin, "-e", "bluetoothctl" };
 pub const media_play_pause_cmd = [_][*:0]const u8{ "/bin/sh", "-c", "playerctl play-pause" };

@@ -26,6 +26,8 @@ pub const Action = union(enum) {
     chvt: u32,
     togglescratch: void,
     toggleprivacy: void,
+    togglenightmode: void,
+    toggle_oneshot_swallow: void,
     keyboard_layout: config.KeyboardLayoutAction,
 };
 
@@ -46,6 +48,7 @@ pub const keys = keys: {
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_Return, .action = .{ .spawn = &config.term_cmd } },
         .{ .mod = MODKEY, .keysym = c.XKB_KEY_Return, .action = .{ .spawn_minor = &config.term_cmd } },
         .{ .mod = MODKEY, .keysym = c.XKB_KEY_p, .action = .{ .spawn = &config.menu_cmd } },
+        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_P, .action = .{ .spawn = &config.selector_palette_cmd } },
         // .{ .mod = MODKEY, .keysym = c.XKB_KEY_p, .action = .{ .spawn = &config.window_cmd } },
         // .{ .mod = MODKEY, .keysym = c.XKB_KEY_s, .action = .{ .spawn = &config.screenshot_cmd } },
         .{ .mod = MODKEY, .keysym = c.XKB_KEY_e, .action = .{ .spawn = &config.emacs_cmd } },
@@ -54,7 +57,7 @@ pub const keys = keys: {
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_c, .action = .{ .spawn_minor = &config.calc_cmd } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_b, .action = .{ .spawn_minor = &config.bluetooth_cmd } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_e, .action = .{ .spawn = &config.excel_cmd } },
-        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_s, .action = .{ .spawn = &config.screenshot_cmd } },
+        .{ .mod = MODKEY | CTRL, .keysym = c.XKB_KEY_s, .action = .{ .spawn = &config.screenshot_cmd } },
 
         // Media controls
         .{ .mod = 0, .keysym = c.XKB_KEY_XF86AudioPlay, .action = .{ .spawn_minor = &config.media_play_pause_cmd } },
@@ -99,6 +102,9 @@ pub const keys = keys: {
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_greater, .action = .{ .toggletag = config.scratchpad_tag } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_Delete, .action = .{ .quit = {} } },
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_p, .action = .{ .toggleprivacy = {} } },
+
+        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_n, .action = .{ .togglenightmode = {} } },
+        .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_S, .action = .{ .toggle_oneshot_swallow = {} } },
 
 
         // Keyboard Layout
