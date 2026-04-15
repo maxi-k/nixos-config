@@ -84,7 +84,11 @@ for file in $(ls -1 /sys/class/drm/*/edid); do
 done
 '';
         executable = true;
-      };
+      }
+      // addHomeBinary "network-login-page" {
+        text = ''xdg-open http://nmcheck.gnome.org/'';
+      }
+      ;
     };
   };
 }

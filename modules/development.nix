@@ -38,6 +38,7 @@
   hm = {
     programs.git = {
       enable = true;
+      lfs.enable = true;
       signing = {
         key = "BA96B52648D56595";
         signByDefault = false;

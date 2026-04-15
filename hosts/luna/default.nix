@@ -8,6 +8,7 @@
     ../../modules/bspwm
     ../../modules/development.nix
     ../../modules/tigerwm
+    ../../modules/tigerbeetle.nix
     # ../../modules/river.nix
   ];
 

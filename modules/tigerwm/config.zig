@@ -371,12 +371,7 @@ pub const autostart_cmds = [_][]const [*:0]const u8{
     &xwayland_cmd,
     &[_][*:0]const u8{"/bin/sh", "-c", "mktheme"},
     // &term_cmd
-    // Example idle/lock/DPMS workflow (disabled by default):
-    // &[_][*:0]const u8{
-    //     "/bin/sh",
-    //     "-c",
-    //     "swayidle -w timeout 300 'gtklock -d' timeout 600 \"wlr-randr | awk '/^[^[:space:]].* connected/{print \\\\$1}' | xargs -r -I{} wlr-randr --output {} --off\" resume \"wlr-randr | awk '/^[^[:space:]].* connected/{print \\\\$1}' | xargs -r -I{} wlr-randr --output {} --on\" before-sleep 'gtklock -d'",
-    // },
+    &[_][*:0]const u8{"/bin/sh", "-c", "swayidle -w timeout 300 'swaylock -d'",},
 };
 
 pub const TaggedAutostartCmd = struct {

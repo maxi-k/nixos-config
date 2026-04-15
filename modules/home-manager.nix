@@ -21,7 +21,7 @@
           ".config/${path}" = value;
         };
         addHomeBinary = name: value: {
-          ".local/bin/${name}" = value;
+          ".local/bin/${name}" = { executable = true; } // value;
         };
         addHomeData = path: value: {
           ".local/share/${path}" = value;
