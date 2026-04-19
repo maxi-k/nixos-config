@@ -72,15 +72,24 @@ in
       "L+ /usr/libexec/xdg-desktop-portal - - - - ${pkgs.xdg-desktop-portal}/libexec/xdg-desktop-portal"
     ];
 
-    hm.programs = {
-      swaylock = {
-        enable = true;
-        package = pkgs.swaylock-effects;
+    hm = { addHomeBinary, addHomeConfig, ... }: {
+      home.file = {}
+                  // addHomeConfig "gtk-3.0/gtk.css" {
+                    source = ./gtk.css;
+                  }
+      // addHomeConfig "gtk-4.0/gtk.css" {
+        source = ./gtk.css;
       };
 
-      waybar = {
-        enable = true;
-        style = ''
+      programs = {
+        swaylock = {
+          enable = true;
+          package = pkgs.swaylock-effects;
+        };
+
+        waybar = {
+          enable = true;
+          style = ''
           * {
             font-family: 'Jetbrains Mono';
             font-size: 18px;
@@ -110,44 +119,45 @@ in
             color: #ffffff;
           }
         '';
-        settings = {
-          mainBar = {
-            layer = "top";
-            position = cfg.waybar.position;
-            modules-left = ["dwl/tags"];
-            modules-center = ["dwl/window"];
-            modules-right = ["sway/language" "pulseaudio" "network" "battery" "clock" "tray" ];
+          settings = {
+            mainBar = {
+              layer = "top";
+              position = cfg.waybar.position;
+              modules-left = ["dwl/tags"];
+              modules-center = ["dwl/window"];
+              modules-right = ["sway/language" "pulseaudio" "network" "battery" "clock" "tray" ];
 
-            "dwl/tags" = {
-              num-tags = 11;
-              tag-labels = ["1" "2" "3" "4" "5" "6" "7" "8" "9" "0" "~"];
-            };
+              "dwl/tags" = {
+                num-tags = 11;
+                tag-labels = ["1" "2" "3" "4" "5" "6" "7" "8" "9" "0" "~"];
+              };
 
-            "dwl/window" = {
-              format = "{layout} {title}";
-              max-length = 80;
-            };
+              "dwl/window" = {
+                format = "{layout} {title}";
+                max-length = 80;
+              };
 
-            clock = {
-              format = "{:%Y-%m-%d %H:%M}";
-            };
+              clock = {
+                format = "{:%Y-%m-%d %H:%M}";
+              };
 
-            battery = {
-              format = "{capacity}% {icon}";
-              format-icons = ["" "" "" "" ""];
-            };
+              battery = {
+                format = "{capacity}% {icon}";
+                format-icons = ["" "" "" "" ""];
+              };
 
-            network = {
-              format-wifi = "{essid}";
-              format-ethernet = "Wired";
-              format-disconnected = "Disconnected";
-            };
+              network = {
+                format-wifi = "{essid}";
+                format-ethernet = "Wired";
+                format-disconnected = "Disconnected";
+              };
 
-            pulseaudio = {
-              format = "{volume}% {icon}";
-              format-muted = "Muted";
-              format-icons.default = ["" "" ""];
-              on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
+              pulseaudio = {
+                format = "{volume}% {icon}";
+                format-muted = "Muted";
+                format-icons.default = ["" "" ""];
+                on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
+              };
             };
           };
         };
