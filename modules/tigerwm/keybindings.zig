@@ -109,7 +109,7 @@ pub const keys = keys: {
 
         // Keyboard Layout
         .{ .mod = MODKEY | SHIFT, .keysym = c.XKB_KEY_space, .action = .{ .keyboard_layout = .cycle_layout } },
-        .{ .mod = MODKEY | CTRL, .keysym = c.XKB_KEY_space, .action = .{ .keyboard_layout = .{ .toggle_option = .mac_layout } } },
+        .{ .mod = MODKEY | CTRL, .keysym = c.XKB_KEY_space, .action = .{ .keyboard_layout = .{ .toggle_option = .altwin_swap_alt_win } } },
     };
 
     const tag_bindings = blk: {

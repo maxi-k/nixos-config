@@ -78,7 +78,7 @@ pub const KeyboardLayout = enum {
 
 pub const KeyboardOption = enum {
     ctrl_nocaps,
-    mac_layout,
+    altwin_swap_alt_win,
 };
 
 pub fn keyboardLayoutToXkbName(layout: KeyboardLayout) [*:0]const u8 {
@@ -88,7 +88,7 @@ pub fn keyboardLayoutToXkbName(layout: KeyboardLayout) [*:0]const u8 {
 pub fn keyboardOptionToXkbName(option: KeyboardOption) [*:0]const u8 {
     return switch (option) {
         .ctrl_nocaps => "ctrl:nocaps",
-        .mac_layout => "altwin:swap_alt_win",
+        .altwin_swap_alt_win => "altwin:swap_alt_win",
     };
 }
 
