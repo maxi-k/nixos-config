@@ -31,6 +31,8 @@
       # for controllers etc
       steam-devices-udev-rules
   ];
+  programs.niri.enable = true;
+
 
   # steam package + some tweaks
   programs.steam.enable = true;

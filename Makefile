@@ -22,6 +22,10 @@ switch:
 	$(SUDO) nixos-rebuild switch --flake .#$(HOSTNAME) --impure $(OVERRIDE_INPUT_ARGS)
 .PHONY: switch
 
+boot:
+	$(SUDO) nixos-rebuild boot --flake .#$(HOSTNAME) --impure $(OVERRIDE_INPUT_ARGS)
+.PHONY: boot
+
 test:
 	$(SUDO) nixos-rebuild test --flake .#$(HOSTNAME) --impure $(OVERRIDE_INPUT_ARGS)
 .PHONY: test

@@ -1,13 +1,13 @@
 * {
   font-family: 'Jetbrains Mono';
-  font-size: 18px;
+  font-size: 16px;
 }
 window#waybar {
   background-color: rgba(34, 34, 34, 0.9);
   color: #ffffff;
 }
 #workspaces button {
-  padding: .3em 1em;
+  padding: .2em .7em;
   background-color: transparent;
   color: #888888;
 }
@@ -17,7 +17,7 @@ window#waybar {
 #workspaces button.focused {
   color: #eeeeee;
   background-color: rgba(127, 127, 127, 0.4); 
-  /* border-top: .1em solid #eeeeee; */
+  border-top: .1em solid #eeeeee;
 }
 #tags button.urgent {
   color: #ff0000;

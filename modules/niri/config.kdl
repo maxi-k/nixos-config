@@ -119,6 +119,7 @@ layout {
     // - "always", the focused column will always be centered.
     // - "on-overflow", focusing a column will center it if it doesn't fit
     //   together with the previously focused column.
+    // center-focused-column "on-overflow"
     center-focused-column "never"
 
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
@@ -223,7 +224,7 @@ layout {
     // You can enable drop shadows for windows.
     shadow {
         // Uncomment the next line to enable shadows.
-        // on
+        on
 
         // By default, the shadow draws only around its window, and not behind it.
         // Uncomment this setting to make the shadow draw behind its window.
@@ -245,13 +246,13 @@ layout {
         // pixels and match the CSS box-shadow properties.
 
         // Softness controls the shadow blur radius.
-        softness 30
+        softness 10
 
         // Spread expands the shadow.
         spread 5
 
         // Offset moves the shadow relative to the window.
-        offset x=0 y=5
+        offset x=0 y=0
 
         // You can also change the shadow color and opacity.
         color "#0007"
@@ -314,7 +315,7 @@ animations {
     // off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
-    // slowdown 3.0
+    slowdown 0.3
 }
 
 // Window rules let you adjust behavior for individual windows.
@@ -359,12 +360,22 @@ window-rule {
     clip-to-geometry true
 }
 
-workspace "scratch" { open-on-output "eDP-1"; }
-window-rule {
-    match app-id="emacs-scratchpad"
-    open-on-workspace "special"
-    opacity 1.000000
-}
+workspace "1" { open-on-output "eDP-1"; }
+workspace "2" { open-on-output "eDP-1"; }
+workspace "3" { open-on-output "eDP-1"; }
+workspace "4" { open-on-output "eDP-1"; }
+workspace "5" { open-on-output "eDP-1"; }
+workspace "6" { open-on-output "eDP-1"; }
+workspace "7" { open-on-output "eDP-1"; }
+workspace "8" { open-on-output "eDP-1"; }
+workspace "9" { open-on-output "eDP-1"; }
+workspace "10" { open-on-output "eDP-1"; }
+
+// window-rule {
+//     match app-id="emacs-scratchpad"
+//     open-on-workspace "special"
+//     opacity 1.000000
+// }
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -385,9 +396,15 @@ binds {
     Mod+Period { spawn-sh "niri msg workspaces | grep \"\\*.*scratch\" && niri msg action focus-workspace-previous || niri msg action focus-workspace scratch"; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
+    Mod+Shift+Return hotkey-overlay-title="Terminal" { spawn "alacritty"; }
     Mod+Return hotkey-overlay-title="Terminal" { spawn "alacritty"; }
-    Mod+P hotkey-overlay-title="Launcher" { spawn "launcher"; }
-    Mod+Alt+U hotkey-overlay-title="Lock" { spawn "swaylock"; }
+    Mod+P { spawn "launcher"; }
+    Mod+Shift+S { screenshot; }
+    Mod+Shift+B { spawn-sh "alacritty -e bluetoothctl"; }
+    Mod+Shift+C { spawn-sh "alacritty -e numbat"; }
+    Mod+Shift+E { spawn-sh "libreoffice --calc"; }
+    Mod+Shift+U hotkey-overlay-title="Lock" { spawn "swaylock"; }
+    Mod+Shift+Delete { quit; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -444,16 +461,16 @@ binds {
     // Mod+U              { focus-workspace-down; }
     // Mod+D              { focus-workspace-up; }
 
-    Mod+1 { focus-workspace 1; }
-    Mod+2 { focus-workspace 2; }
-    Mod+3 { focus-workspace 3; }
-    Mod+4 { focus-workspace 4; }
-    Mod+5 { focus-workspace 5; }
-    Mod+6 { focus-workspace 6; }
-    Mod+7 { focus-workspace 7; }
-    Mod+8 { focus-workspace 8; }
-    Mod+9 { focus-workspace 9; }
-    Mod+0 { focus-workspace 10; }
+    Mod+1 { focus-workspace "1"; }
+    Mod+2 { focus-workspace "2"; }
+    Mod+3 { focus-workspace "3"; }
+    Mod+4 { focus-workspace "4"; }
+    Mod+5 { focus-workspace "5"; }
+    Mod+6 { focus-workspace "6"; }
+    Mod+7 { focus-workspace "7"; }
+    Mod+8 { focus-workspace "8"; }
+    Mod+9 { focus-workspace "9"; }
+    Mod+0 { focus-workspace "10"; }
 
     Mod+WheelScrollRight      { focus-column-right; }
     Mod+WheelScrollLeft       { focus-column-left; }
@@ -471,16 +488,16 @@ binds {
     // Mod+Shift+U         { move-column-to-workspace-down; }
     // Mod+Shift+D         { move-column-to-workspace-up; }
 
-    Mod+Shift+1 { move-window-to-workspace 1; }
-    Mod+Shift+2 { move-window-to-workspace 2; }
-    Mod+Shift+3 { move-window-to-workspace 3; }
-    Mod+Shift+4 { move-window-to-workspace 4; }
-    Mod+Shift+5 { move-window-to-workspace 5; }
-    Mod+Shift+6 { move-window-to-workspace 6; }
-    Mod+Shift+7 { move-window-to-workspace 7; }
-    Mod+Shift+8 { move-window-to-workspace 8; }
-    Mod+Shift+9 { move-window-to-workspace 9; }
-    Mod+Shift+0 { move-window-to-workspace 10; }
+    Mod+Shift+1 { move-window-to-workspace "1"; }
+    Mod+Shift+2 { move-window-to-workspace "2"; }
+    Mod+Shift+3 { move-window-to-workspace "3"; }
+    Mod+Shift+4 { move-window-to-workspace "4"; }
+    Mod+Shift+5 { move-window-to-workspace "5"; }
+    Mod+Shift+6 { move-window-to-workspace "6"; }
+    Mod+Shift+7 { move-window-to-workspace "7"; }
+    Mod+Shift+8 { move-window-to-workspace "8"; }
+    Mod+Shift+9 { move-window-to-workspace "9"; }
+    Mod+Shift+0 { move-window-to-workspace "10"; }
 
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
@@ -501,35 +518,35 @@ binds {
 
     Mod+Ctrl+O       { move-column-to-monitor-next; }
 
-    Mod+Ctrl+1 { move-column-to-workspace 1; }
-    Mod+Ctrl+2 { move-column-to-workspace 2; }
-    Mod+Ctrl+3 { move-column-to-workspace 3; }
-    Mod+Ctrl+4 { move-column-to-workspace 4; }
-    Mod+Ctrl+5 { move-column-to-workspace 5; }
-    Mod+Ctrl+6 { move-column-to-workspace 6; }
-    Mod+Ctrl+7 { move-column-to-workspace 7; }
-    Mod+Ctrl+8 { move-column-to-workspace 8; }
-    Mod+Ctrl+9 { move-column-to-workspace 9; }
-    Mod+Ctrl+0 { move-column-to-workspace 10; }
+    Mod+Ctrl+1 { move-column-to-workspace "1"; }
+    Mod+Ctrl+2 { move-column-to-workspace "2"; }
+    Mod+Ctrl+3 { move-column-to-workspace "3"; }
+    Mod+Ctrl+4 { move-column-to-workspace "4"; }
+    Mod+Ctrl+5 { move-column-to-workspace "5"; }
+    Mod+Ctrl+6 { move-column-to-workspace "6"; }
+    Mod+Ctrl+7 { move-column-to-workspace "7"; }
+    Mod+Ctrl+8 { move-column-to-workspace "8"; }
+    Mod+Ctrl+9 { move-column-to-workspace "9"; }
+    Mod+Ctrl+0 { move-column-to-workspace "10"; }
 
     // -------------------- alt: workspace commands --------------------
-    Mod+Alt+H     { move-workspace-to-monitor-left; }
-    Mod+Alt+L     { move-workspace-to-monitor-right; }
+    // Mod+Alt+H     { move-workspace-to-monitor-left; }
+    // Mod+Alt+L     { move-workspace-to-monitor-right; }
     Mod+Alt+J     { move-workspace-down; }
     Mod+Alt+K     { move-workspace-up; }
 
     Mod+Alt+O     { move-workspace-to-monitor-next; }
 
-    Mod+Alt+1 { move-workspace-to-index 1; }
-    Mod+Alt+2 { move-workspace-to-index 2; }
-    Mod+Alt+3 { move-workspace-to-index 3; }
-    Mod+Alt+4 { move-workspace-to-index 4; }
-    Mod+Alt+5 { move-workspace-to-index 5; }
-    Mod+Alt+6 { move-workspace-to-index 6; }
-    Mod+Alt+7 { move-workspace-to-index 7; }
-    Mod+Alt+8 { move-workspace-to-index 8; }
-    Mod+Alt+9 { move-workspace-to-index 9; }
-    Mod+Alt+0 { move-workspace-to-index 10; }
+    // Mod+Alt+1 { move-workspace-to-index 1; }
+    // Mod+Alt+2 { move-workspace-to-index 2; }
+    // Mod+Alt+3 { move-workspace-to-index 3; }
+    // Mod+Alt+4 { move-workspace-to-index 4; }
+    // Mod+Alt+5 { move-workspace-to-index 5; }
+    // Mod+Alt+6 { move-workspace-to-index 6; }
+    // Mod+Alt+7 { move-workspace-to-index 7; }
+    // Mod+Alt+8 { move-workspace-to-index 8; }
+    // Mod+Alt+9 { move-workspace-to-index 9; }
+    // Mod+Alt+0 { move-workspace-to-index 10; }
 
     // -------------------- window presets & state --------------------
 
@@ -539,17 +556,15 @@ binds {
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
 
-    Mod+F { maximize-column; }
-    Mod+Shift+F { fullscreen-window; }
     // Expand the focused column to space not taken up by other fully visible columns.
     // Makes the column "fill the rest of the space".
-    Mod+Ctrl+F { expand-column-to-available-width; }
-
+    Mod+E { expand-column-to-available-width; }
+    Mod+F { maximize-column; }
     Mod+C { center-column; }
-
     // Center all fully visible columns on screen.
-    Mod+Shift+C { center-visible-columns; }
-
+    // Mod+Shift+C { center-visible-columns; }
+    Mod+Shift+F { fullscreen-window; }
+    
     // Finer width adjustments.
     // This command can also:
     // * set width in pixels: "1000"
@@ -566,13 +581,13 @@ binds {
     Mod+Shift+Equal { set-window-height "+10%"; }
 
     // Move the focused window between the floating and the tiling layout.
-    Mod+V       { toggle-window-floating; }
-    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    Mod+G       { toggle-window-floating; }
+    Mod+Shift+G { switch-focus-between-floating-and-tiling; }
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
     // rather than stacked on top of each other.
-    Mod+Shift+T { toggle-column-tabbed-display; }
+    Mod+T { toggle-column-tabbed-display; }
 
     // 
     // The following binds move the focused window in and out of a column.

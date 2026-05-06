@@ -14,6 +14,7 @@ pub const max_pointer_constraints: usize = 8;
 pub const max_session_locks: usize = 2;
 pub const max_ipc_outputs: usize = 32;
 pub const max_cursor_devices: usize = 16;
+pub const max_switch_devices: usize = 8;
 pub const max_popup_trackers: usize = 64;
 pub const max_tablet_devices: usize = 16;
 pub const max_tablet_pads: usize = 16;
