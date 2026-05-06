@@ -6,6 +6,7 @@
     ../../modules/desktop.nix
     ../../modules/laptop.nix
     ../../modules/bspwm
+    ../../modules/mangowm
     ../../modules/development.nix
     ../../modules/tigerwm
     ../../modules/tigerbeetle.nix

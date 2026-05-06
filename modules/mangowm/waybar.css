@@ -1,0 +1,28 @@
+* {
+  font-family: 'Jetbrains Mono';
+  font-size: 16px;
+}
+window#waybar {
+  background-color: rgba(34, 34, 34, 0.9);
+  color: #ffffff;
+}
+#workspaces button {
+  padding: .2em .7em;
+  background-color: transparent;
+  color: #888888;
+}
+#workspaces button.visible {
+  color: #cccccc;
+}
+#workspaces button.active {
+  color: #eeeeee;
+  background-color: rgba(127, 127, 127, 0.4); 
+  border-top: .1em solid #eeeeee;
+}
+#tags button.urgent {
+  color: #ff0000;
+}
+#window, #clock, #battery, #network, #pulseaudio, #tray {
+  padding: 0 1em;
+  color: #ffffff;
+}
