@@ -10,7 +10,7 @@
     ../../modules/development.nix
     ../../modules/tigerwm
     ../../modules/tigerbeetle.nix
-    # ../../modules/river.nix
+    ../../modules/river.nix
   ];
 
   networking.hostName = "luna"; # Define your hostname.
@@ -36,6 +36,7 @@
 
   hardware = {  
      enableAllFirmware = true;
+     bluetooth.enable = true;
   }; 
   # enable firmware update for `fwupdmgr update`
   services.fwupd.enable = true;
