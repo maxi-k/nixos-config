@@ -26,7 +26,9 @@
   services.desktopManager.gnome.enable = true;
   programs.niri.enable = true;
 
-  environment.systemPackages = with pkgs; [ ];
+  environment.systemPackages = with pkgs; [
+    wlr-randr
+  ];
   
   # when enabling multiple desktop environments
   # (e.g. plasma & gnome), need to specify this

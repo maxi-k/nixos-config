@@ -1,27 +1,23 @@
 { config, lib, pkgs, ... }:
 
 let
-  riverSession = ''
-          [Desktop Entry]
-          Name=River
-          Comment=Dynamic Wayland compositor
-          Exec=/run/xdg/river-session
-          Type=Application
-        '';
-  river_install = 
-    pkgs.river.overrideAttrs (_: {
-      postInstall = ''
-          mkdir -p $out/share/wayland-sessions
-          echo "${riverSession}" > $out/share/wayland-sessions/river.desktop
-        '';
-      passthru.providedSessions = [ "river" ];
-    });
+  riverSession = pkgs.writeTextDir "share/wayland-sessions/river.desktop" ''
+    [Desktop Entry]
+    Name=River
+    Comment=Dynamic Wayland compositor
+    Exec=/run/current-system/sw/bin/river
+    Type=Application
+  '';
+  riverSessionPackage = riverSession.overrideAttrs (_: {
+    passthru.providedSessions = [ "river" ];
+  });
 in {
   environment.systemPackages = [
-    river_install
+    pkgs.river
+    riverSessionPackage
   ];
 
   services.displayManager.sessionPackages = [
-    river_install
+    riverSessionPackage
   ];
 }
