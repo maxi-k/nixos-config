@@ -5,7 +5,7 @@ export LC_TIME="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 export VISUAL="vim"
 export TERMINAL="alacritty"
-export EDITOR="emacsclient -nw"
+export EDITOR="emacsclient -nw -a ''"
 export READER="zathura"
 
 # Setup PATH

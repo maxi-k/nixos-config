@@ -9,7 +9,7 @@ alias ..='cd ../'
 alias cdc='pwd | pbcopy'
 alias cdp='cd $(pbpaste)'
 
-alias ec='emacsclient -nw'
+alias e="$EDITOR"
 
 command -v vim &>/dev/null && alias vi='vim'
 command -v nvim &>/dev/null && alias vi='nvim'
