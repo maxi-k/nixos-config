@@ -5,7 +5,7 @@ let
     patches = (oldAttrs.patches or [ ]) ++ [
       (pkgs.fetchpatch {
         url = "https://patch-diff.githubusercontent.com/raw/mangowm/mango/pull/676.diff";
-        hash = "sha256-dxDsTbSSRZp3gIizO7Q5XLHqsJfENTy97ZOkc2emrWU=";
+        hash = "sha256-wRQiF2BHFHEipeU3K2gtBgm/Xr+oz9KfETJgCfttaoI=";
       })
     ];
   });

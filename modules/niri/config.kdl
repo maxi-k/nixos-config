@@ -23,8 +23,8 @@ input {
 
         // Enable numlock on startup, omitting this setting disables it.
         numlock
-        repeat-delay 200
-        repeat-rate 30
+        repeat-delay 250
+        repeat-rate 40
     }
 
     // Next sections include libinput settings.
@@ -133,6 +133,7 @@ layout {
         proportion 0.5
         proportion 0.66667
         proportion 0.9
+        proportion 1.0
 
         // Fixed sets the width in logical pixels exactly.
         // fixed 1920
@@ -144,6 +145,7 @@ layout {
         proportion 0.5
         proportion 0.66667
         proportion 0.9
+        proportion 1.0
     }
 
     // You can change the default width of the new windows.
@@ -575,12 +577,12 @@ binds {
     // * adjust width as a percentage of screen width: "-10%" or "+10%"
     // Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
     // set-column-width "100" will make the column occupy 200 physical screen pixels.
-    Mod+Minus { set-column-width "-10%"; }
-    Mod+Equal { set-column-width "+10%"; }
+    Mod+Minus { set-column-width "-5%"; }
+    Mod+Equal { set-column-width "+5%"; }
 
     // Finer height adjustments when in column with other windows.
-    Mod+Shift+Minus { set-window-height "-10%"; }
-    Mod+Shift+Equal { set-window-height "+10%"; }
+    Mod+Shift+Minus { set-window-height "-5%"; }
+    Mod+Shift+Equal { set-window-height "+5%"; }
 
     // Move the focused window between the floating and the tiling layout.
     Mod+G       { toggle-window-floating; }
