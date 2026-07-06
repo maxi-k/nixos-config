@@ -1,0 +1,59 @@
+# TigerBeetle palette from tigerbeetle.com and tigerstyle.dev.
+
+[colors.primary]
+background = "#141414"
+foreground = "#D2D2D2"
+dim_foreground = "#777777"
+bright_foreground = "#E8E8E8"
+
+[colors.cursor]
+text = "#141414"
+cursor = "#D4776E"
+
+[colors.vi_mode_cursor]
+text = "#E8E8E8"
+cursor = "#817AC2"
+
+[colors.search.matches]
+foreground = "#141414"
+background = "#AAAAAA"
+
+[colors.search.focused_match]
+foreground = "#242223"
+background = "#8CC89E"
+
+[colors.footer_bar]
+foreground = "#141414"
+background = "#AAAAAA"
+
+[colors.hints.start]
+foreground = "#242223"
+background = "#C9BB7C"
+
+[colors.hints.end]
+foreground = "#141414"
+background = "#AAAAAA"
+
+[colors.selection]
+text = "#E8E8E8"
+background = "#383838"
+
+[colors.normal]
+black = "#202020"
+red = "#D4776E"
+green = "#8CC89E"
+yellow = "#C9BB7C"
+blue = "#5591BF"
+magenta = "#817AC2"
+cyan = "#AAAAAA"
+white = "#D2D2D2"
+
+[colors.bright]
+black = "#777777"
+red = "#D4776E"
+green = "#8CC89E"
+yellow = "#C9BB7C"
+blue = "#5591BF"
+magenta = "#817AC2"
+cyan = "#AAAAAA"
+white = "#E8E8E8"

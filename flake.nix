@@ -71,6 +71,7 @@
             inherit inputs system user;
             hostName = name;
             hostPath = hostModules.${name};
+            flakeOutputPath = self.outPath;
           };
           modules = sharedModules ++ [hostModules.${name}];
         };

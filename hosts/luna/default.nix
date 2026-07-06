@@ -23,7 +23,10 @@
   repo.desktop.displayManager = "ly";
   repo.tigerwm.waybar.position = "top";
 
-  services.desktopManager.gnome.enable = true;
+  # services.desktopManager.gnome.enable = true;
+
+  services.xserver.desktopManager.cinnamon.enable = true;
+  services.desktopManager.plasma6.enable = true;
   programs.niri.enable = true;
 
   environment.systemPackages = with pkgs; [

@@ -33,11 +33,12 @@ input {
     touchpad {
         // off
         tap
-        // dwt
-        // dwtp
+        natural-scroll
+        // disable-when-typing
+        dwt
+        dwtp
         // drag false
         // drag-lock
-        natural-scroll
         // accel-speed 0.2
         // accel-profile "flat"
         // scroll-method "two-finger"
@@ -268,10 +269,10 @@ layout {
     // Top and bottom struts will simply add outer gaps in addition to the area occupied by
     // layer-shell panels and regular gaps.
     struts {
-        // left 64
-        // right 64
-        // top 64
-        // bottom 64
+        // left 8
+        // right 8
+        // top 8
+        // bottom 8
     }
 }
 
