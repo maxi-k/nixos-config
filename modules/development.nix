@@ -30,6 +30,8 @@
     entr
     copilot-language-server
     codex
+    # chatgpt
+    grok-build
     # documentation
     man-pages
     man-pages-posix

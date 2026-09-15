@@ -2,6 +2,9 @@
 // "/-" comments out the following node.
 // Check the wiki for a full description of the configuration:
 // https://yalter.github.io/niri/Configuration:-Introduction
+environment {
+    XDG_CURRENT_DESKTOP "gnome"
+}
 
 // Input device configuration.
 // Find the full list of options on the wiki:
@@ -281,7 +284,7 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-spawn-sh-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots && systemctl --user start xdg-desktop-portal xdg-desktop-portal-wlr"
+// spawn-sh-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots && systemctl --user start xdg-desktop-portal xdg-desktop-portal-wlr"
 spawn-at-startup "dunst"
 spawn-sh-at-startup "waybar -c ~/.config/niri/waybar.conf -s ~/.config/niri/waybar.css"
 spawn-at-startup "awww-daemon"
