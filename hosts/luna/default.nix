@@ -28,6 +28,7 @@
   services.xserver.desktopManager.cinnamon.enable = true;
   services.desktopManager.plasma6.enable = true;
   programs.niri.enable = true;
+  systemd.user.services.niri.serviceConfig.OOMPolicy = "continue";
 
   environment.systemPackages = with pkgs; [
     wlr-randr
