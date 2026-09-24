@@ -11,6 +11,6 @@
 #   });
 # in
 {
-  programs.mangowc.enable = true;
+  programs.mango.enable = true;
   # programs.mangowc.package = mango;
 }

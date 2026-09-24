@@ -19,7 +19,7 @@ update-inputs:
 .PHONY: update-inputs
 
 switch:
-	$(SUDO) nixos-rebuild switch --flake .#$(HOSTNAME) --impure $(OVERRIDE_INPUT_ARGS)
+	$(SUDO) nixos-rebuild switch --show-trace --flake .#$(HOSTNAME) --impure $(OVERRIDE_INPUT_ARGS)
 .PHONY: switch
 
 boot:

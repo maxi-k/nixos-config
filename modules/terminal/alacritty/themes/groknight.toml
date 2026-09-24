@@ -1,0 +1,60 @@
+# GrokNight — neutral gray base, Tokyo Night accents.
+# Palette from xai-org/grok-build theme/groknight.rs.
+
+[colors.primary]
+background = "#141414"
+foreground = "#e1e1e1"
+dim_foreground = "#6c6c6c"
+bright_foreground = "#e1e1e1"
+
+[colors.cursor]
+text = "#141414"
+cursor = "#bb9af7"
+
+[colors.vi_mode_cursor]
+text = "#141414"
+cursor = "#e0af68"
+
+[colors.search.matches]
+foreground = "#141414"
+background = "#e0af68"
+
+[colors.search.focused_match]
+foreground = "#141414"
+background = "#ff9e64"
+
+[colors.footer_bar]
+foreground = "#c8c8c8"
+background = "#242424"
+
+[colors.hints.start]
+foreground = "#141414"
+background = "#e0af68"
+
+[colors.hints.end]
+foreground = "#141414"
+background = "#7aa2f7"
+
+[colors.selection]
+text = "#e1e1e1"
+background = "#363636"
+
+[colors.normal]
+black = "#0a0a0a"
+red = "#f7768e"
+green = "#9ece6a"
+yellow = "#e0af68"
+blue = "#7aa2f7"
+magenta = "#bb9af7"
+cyan = "#7dcfff"
+white = "#c8c8c8"
+
+[colors.bright]
+black = "#6c6c6c"
+red = "#f7768e"
+green = "#9ece6a"
+yellow = "#e0af68"
+blue = "#7aa2f7"
+magenta = "#bb9af7"
+cyan = "#7dcfff"
+white = "#e1e1e1"
