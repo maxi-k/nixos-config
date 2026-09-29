@@ -50,7 +50,8 @@
   # fingerprint auth
   services.fprintd.enable = true;
   services.gnome.gnome-keyring.enable = true;
-  security.pam.services.sudo.fprintAuth = true;
+  # Use password authentication for sudo, including when the laptop lid is closed.
+  security.pam.services.sudo.fprintAuth = false;
   security.pam.services.gnome-keyring.fprintAuth = true;
   ## based on arch wiki
   # security.pam.services.ly-fingerprint = lib.mkIf (config.services.fprintd.enable && config.services.displayManager.ly.enable) {

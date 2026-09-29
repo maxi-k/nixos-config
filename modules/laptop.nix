@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Disable if devices take long to unsuspend (keyboard, mouse, etc)
-  powerManagement.powertop.enable = true;
+  # Let TLP manage power saving; PowerTOP auto-tuning suspends USB input devices.
+  powerManagement.powertop.enable = false;
   services = {
     power-profiles-daemon.enable = false;
     tlp = {

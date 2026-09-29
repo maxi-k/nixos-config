@@ -59,8 +59,8 @@
 
   # Enable zsh
   programs.zsh.enable = true;
-  # enable command-not-found support
-  programs.command-not-found.enable = true;
+  # Let command-not-found use its default: enable only when its database exists.
+  # The GitHub nixpkgs flake does not include programs.sqlite.
   # Enable nix-direnv for automatically loading shell.nix files
   programs.direnv.enable = true;
 
