@@ -23,6 +23,18 @@
       url = "git+ssh://git@github.com/maxi-k/lispwm.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # local Grok Bot flakes (checkout at ~/dev/grokbot). Absolute paths:
+    # a relative `path:../` would resolve inside the store copy of this
+    # flake and fail. The Makefile can --override-input these.
+    grok-bot = {
+      url = "path:/home/maxi/dev/grokbot/grokbot";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    grokbot-popup = {
+      url = "path:/home/maxi/dev/grokbot/grokbot-popup";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.grok-bot.follows = "grok-bot";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, tigerwm, lispwm, ... }:

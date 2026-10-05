@@ -94,6 +94,43 @@
         "type": "github"
       }
     },
+    "grok-bot": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791220072,
+        "narHash": "sha256-DWsiZaovMAz96O5MvOYv24QV4P9xrCDxIIYqrkoRP6w=",
+        "path": "/home/maxi/dev/grokbot/grokbot",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/maxi/dev/grokbot/grokbot",
+        "type": "path"
+      }
+    },
+    "grokbot-popup": {
+      "inputs": {
+        "grok-bot": [
+          "grok-bot"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791220060,
+        "narHash": "sha256-yNHUEYd5aDJNGO2J3tORhp32ADruSmuuJt0PQd+Xeew=",
+        "path": "/home/maxi/dev/grokbot/grokbot-popup",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/maxi/dev/grokbot/grokbot-popup",
+        "type": "path"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -177,6 +214,8 @@
       "inputs": {
         "agenix": "agenix",
         "awww": "awww",
+        "grok-bot": "grok-bot",
+        "grokbot-popup": "grokbot-popup",
         "home-manager": "home-manager",
         "lispwm": "lispwm",
         "nixpkgs": "nixpkgs",

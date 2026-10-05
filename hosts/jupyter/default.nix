@@ -8,6 +8,7 @@
     ../../modules/lispwm.nix
     ../../modules/bspwm
     ../../modules/development.nix
+    ../../modules/grokbot
     ../../modules/podman.nix
     ../../modules/virtualization.nix
   ];

@@ -8,6 +8,7 @@
     ../../modules/bspwm
     ../../modules/mangowm
     ../../modules/development.nix
+    ../../modules/grokbot
     ../../modules/tigerwm
     ../../modules/tigerbeetle.nix
     ../../modules/river.nix

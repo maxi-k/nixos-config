@@ -407,6 +407,10 @@ binds {
     Mod+Shift+Return hotkey-overlay-title="Terminal" { spawn "alacritty"; }
     Mod+Return hotkey-overlay-title="Terminal" { spawn "alacritty"; }
     Mod+P { spawn "launcher"; }
+    // Grok Bot top-of-screen popup (grokbot-popup, installed via modules/grokbot)
+    Mod+Slash hotkey-overlay-title="Grok Bot popup" { spawn "grokbot-popup" "--toggle"; }
+    Mod+Ctrl+Slash hotkey-overlay-title="Grok Bot pick" { spawn "grokbot-popup-pick"; }
+    // Mod+Alt+Slash hotkey-overlay-title="Grok Bot split" { spawn "grokbot-popup-split"; }
     Mod+Shift+S { screenshot; }
     Mod+Shift+B { spawn-sh "alacritty -e bluetoothctl"; }
     Mod+Shift+C { spawn-sh "alacritty -e numbat"; }
