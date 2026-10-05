@@ -11,6 +11,7 @@
     git git-lfs jujutsu 
     vim 
     zsh bash tmux
+    ghostty
     curl wget
     zip unzip unp
     gdb gcc

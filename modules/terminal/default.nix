@@ -14,13 +14,13 @@ in
     defaultTheme = lib.mkOption {
       type = lib.types.str;
       default = "catppuccin-frappe";
-      description = "Default Alacritty theme name to copy into active-theme.toml.";
+      description = "Default terminal theme from the Alacritty theme collection, shared with Ghostty.";
     };
 
     fontSize = lib.mkOption {
       type = lib.types.float;
       default = 18.0;
-      description = "Alacritty font size.";
+      description = "Alacritty and Ghostty font size.";
     };
   };
 
@@ -31,6 +31,11 @@ in
 
     hm = { lib, addHomeBinary, addHomeConfig, config, ... }: {
     home.file = {}
+      // addHomeConfig "ghostty/config" {
+        text = builtins.readFile ./ghostty/config + ''
+          font-size = ${toString cfg.fontSize}
+        '';
+      }
       // addHomeConfig "alacritty/alacritty.toml" {
         source = settingsFormat.generate "alacritty.toml" alacrittySettings;
       }
@@ -42,7 +47,11 @@ in
         recursive = true;
       }
       // addHomeBinary "change-terminal-theme" {
-        source = ./change-terminal-theme;
+        source = pkgs.replaceVars ./change-terminal-theme {
+          python = "${pkgs.python3}/bin/python3";
+          themeConverter = ./ghostty/convert-theme.py;
+          pkill = "${pkgs.procps}/bin/pkill";
+        };
         executable = true;
       };
 
@@ -53,6 +62,17 @@ in
         else
           chmod u+w "${config.xdg.configHome}/alacritty/active-theme.toml" || true
         fi
+      '';
+
+      home.activation.ensureGhosttyTheme = lib.hm.dag.entryAfter [ "ensureAlacrittyTheme" ] ''
+        mkdir -p "${config.xdg.configHome}/ghostty"
+        # Preserve the current selection, including themes chosen before Ghostty
+        # was installed, instead of resetting to the configured default.
+        themeFile=$(mktemp)
+        ${pkgs.python3}/bin/python3 ${./ghostty/convert-theme.py} \
+          "${config.xdg.configHome}/alacritty/active-theme.toml" > "$themeFile"
+        install -m 0644 "$themeFile" "${config.xdg.configHome}/ghostty/active-theme"
+        rm -f "$themeFile"
       '';
     };
   };

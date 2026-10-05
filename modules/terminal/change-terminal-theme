@@ -1,9 +1,25 @@
 #!/bin/sh
 set -eu
 
-confdir="${XDG_CONFIG_HOME:-$HOME/.config}/alacritty"
+configroot="${XDG_CONFIG_HOME:-$HOME/.config}"
+confdir="$configroot/alacritty"
+ghosttydir="$configroot/ghostty"
 themedir="$confdir/themes"
-theme=`ls "$themedir" | cut -d'.' -f1 | selector -p "terminal theme"`
-test -z "$theme" && notify-send "No theme selected" "Doing nothing" && exit 0
-mkdir -p "$confdir"
+theme=$(for file in "$themedir"/*.toml; do basename "$file" .toml; done | selector -p "terminal theme") || exit 0
+if [ -z "$theme" ]; then
+  notify-send "No theme selected" "Doing nothing"
+  exit 0
+fi
+
+# Convert before changing either terminal, so invalid themes leave both intact.
+themefile=$(mktemp)
+trap 'rm -f "$themefile"' EXIT HUP INT TERM
+@python@ @themeConverter@ "$themedir/$theme.toml" > "$themefile"
+mkdir -p "$confdir" "$ghosttydir"
 install -m 0644 "$themedir/$theme.toml" "$confdir/active-theme.toml"
+install -m 0644 "$themefile" "$ghosttydir/active-theme"
+
+# Alacritty watches its theme file. Ghostty needs an explicit config reload.
+# Match only this user's Ghostty processes; Linux truncates the Nix wrapper's
+# .ghostty-wrapped process name to 15 characters. No running instance is fine.
+@pkill@ -USR2 -u "$(id -u)" -x 'ghostty|\.ghostty-wrappe' || [ "$?" -eq 1 ]

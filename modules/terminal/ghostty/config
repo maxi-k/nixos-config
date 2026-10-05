@@ -1,0 +1,32 @@
+# Match the current Alacritty setup. Font size is supplied by repo.terminal.fontSize.
+font-family = JetBrains Mono
+# Alacritty does not render font ligatures.
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+bold-color = bright
+minimum-contrast = 1
+
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+mouse-hide-while-typing = false
+mouse-scroll-multiplier = 3
+# Keep the primary selection for middle-click paste without copying to CLIPBOARD.
+copy-on-select = true
+selection-word-chars = ",│`|:\"' ()[]{}<>"
+
+window-padding-x = 4
+window-padding-y = 4
+window-padding-balance = false
+window-decoration = auto
+background-opacity = 1
+maximize = false
+fullscreen = false
+window-inherit-font-size = false
+# Ghostty measures scrollback in bytes, so Alacritty's 10000-line limit has no
+# exact equivalent. Keep a generous 10 MB buffer.
+scrollback-limit = 10000000
+
+# Updated by change-terminal-theme and initialized from Alacritty on activation.
+config-file = active-theme
